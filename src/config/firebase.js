@@ -6,12 +6,12 @@ import { getStorage } from 'firebase/storage';
 // Replace these with your Firebase project credentials
 // Get these from: Firebase Console > Project Settings > Your Apps
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyCYWaYrbEw406SNgiMFZpm_U84MrKEfW1w",
+  authDomain: "telugu-learn-19045.firebaseapp.com",
+  projectId: "telugu-learn-19045",
+  storageBucket: "telugu-learn-19045.firebasestorage.app",
+  messagingSenderId: "840591236278",
+  appId: "1:840591236278:web:45451910b969709c5bda17"
 };
 
 // Initialize Firebase
