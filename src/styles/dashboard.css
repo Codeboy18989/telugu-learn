@@ -1,0 +1,85 @@
+/* Dashboard - South Indian Silk Saree Aesthetic */
+
+.dashboard {
+  min-height: 100vh;
+  background-color: var(--color-neutral-cream);
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      rgba(212, 175, 55, 0.03) 0px,
+      rgba(212, 175, 55, 0.03) 2px,
+      transparent 2px,
+      transparent 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(212, 175, 55, 0.03) 0px,
+      rgba(212, 175, 55, 0.03) 2px,
+      transparent 2px,
+      transparent 4px
+    );
+}
+
+.dashboard-header {
+  background: linear-gradient(135deg, var(--color-primary-sapphire) 0%, var(--color-primary-emerald) 50%, var(--color-secondary-bronze) 100%);
+  color: var(--color-neutral-white);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-lg);
+  border-bottom: 4px solid var(--color-secondary-gold);
+  position: relative;
+}
+
+.dashboard-header::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-secondary-gold), var(--color-secondary-copper), var(--color-secondary-bronze));
+}
+
+.dashboard-header h1 {
+  font-size: 32px;
+  margin: 0;
+  color: var(--color-secondary-gold);
+  font-family: var(--font-accent);
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+  letter-spacing: 1px;
+}
+
+.logout-btn {
+  background: var(--color-accent-crimson);
+  color: var(--color-neutral-white);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-weight: 700;
+  border: 2px solid var(--color-accent-ivory);
+  transition: all var(--transition-base);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 14px;
+}
+
+.logout-btn:hover {
+  background: var(--color-secondary-gold);
+  color: var(--color-primary-sapphire);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.dashboard-content {
+  padding: var(--spacing-xl);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dashboard-content p {
+  font-size: 18px;
+  color: var(--color-neutral-gray);
+  margin: var(--spacing-md) 0;
+}

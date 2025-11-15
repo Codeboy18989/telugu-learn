@@ -1,0 +1,341 @@
+/* South Indian Silk Saree Inspired Theme - Vibrant & Bold */
+/* Handmade feel, woven textile backgrounds, golds & bronzes */
+
+:root {
+  /* Primary Colors - Jewel Tones */
+  --color-primary-sapphire: #0d3b66;
+  --color-primary-emerald: #2d6a4f;
+  --color-primary-amethyst: #5a189a;
+  
+  /* Secondary Colors - Golds & Bronzes */
+  --color-secondary-gold: #d4af37;
+  --color-secondary-bronze: #b8860b;
+  --color-secondary-copper: #d2691e;
+  --color-secondary-saffron: #ff9933;
+  
+  /* Accent Colors - Vibrant */
+  --color-accent-crimson: #c41e3a;
+  --color-accent-magenta: #d946a6;
+  --color-accent-coral: #ff6b6b;
+  --color-accent-ivory: #fef9f3;
+  --color-accent-charcoal: #2c2c2c;
+  
+  /* Neutral Colors */
+  --color-neutral-cream: #faf8f3;
+  --color-neutral-white: #ffffff;
+  --color-neutral-gray: #757575;
+  --color-neutral-gray-light: #f0ede5;
+  --color-neutral-gray-dark: #424242;
+  --color-neutral-black: #1a1a1a;
+  
+  /* Semantic Colors */
+  --color-success: #2e7d32;
+  --color-warning: #f57f17;
+  --color-error: #c41e3a;
+  --color-info: #0277bd;
+  
+  /* Typography */
+  --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-accent: 'Georgia', 'Times New Roman', serif;
+  
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
+  
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 50%;
+  
+  /* Shadows - Softer, handmade feel */
+  --shadow-sm: 2px 3px 6px rgba(0, 0, 0, 0.12);
+  --shadow-md: 4px 6px 12px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 8px 12px 20px rgba(0, 0, 0, 0.18);
+  --shadow-xl: 12px 18px 30px rgba(0, 0, 0, 0.2);
+  
+  /* Transitions */
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 300ms ease-in-out;
+  --transition-slow: 500ms ease-in-out;
+}
+
+/* Woven textile inspired background */
+body {
+  background-color: var(--color-neutral-cream);
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      rgba(212, 175, 55, 0.03) 0px,
+      rgba(212, 175, 55, 0.03) 2px,
+      transparent 2px,
+      transparent 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(212, 175, 55, 0.03) 0px,
+      rgba(212, 175, 55, 0.03) 2px,
+      transparent 2px,
+      transparent 4px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      transparent 0px,
+      transparent 4px,
+      rgba(13, 59, 102, 0.02) 4px,
+      rgba(13, 59, 102, 0.02) 8px
+    );
+  font-family: var(--font-primary);
+  color: var(--color-neutral-black);
+  line-height: 1.6;
+}
+
+/* Reset defaults */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Typography - Bold & Storytelling */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-accent);
+  color: var(--color-primary-sapphire);
+  margin-bottom: var(--spacing-md);
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+h1 {
+  font-size: 48px;
+  color: var(--color-secondary-gold);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: var(--spacing-lg);
+}
+
+h2 {
+  font-size: 32px;
+  color: var(--color-primary-sapphire);
+  margin-bottom: var(--spacing-lg);
+}
+
+h3 {
+  font-size: 24px;
+  color: var(--color-primary-emerald);
+  margin-bottom: var(--spacing-md);
+}
+
+p {
+  margin-bottom: var(--spacing-md);
+  color: var(--color-neutral-gray-dark);
+}
+
+/* Buttons - Bold & Vibrant */
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-size: 16px;
+  font-family: var(--font-primary);
+  font-weight: 700;
+  transition: all var(--transition-base);
+  background: linear-gradient(135deg, var(--color-primary-sapphire) 0%, var(--color-secondary-gold) 100%);
+  color: white;
+  box-shadow: var(--shadow-md);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: 2px solid transparent;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  background: linear-gradient(135deg, var(--color-secondary-gold) 0%, var(--color-primary-sapphire) 100%);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Button Variants */
+button.secondary {
+  background: var(--color-neutral-gray-light);
+  color: var(--color-neutral-charcoal);
+  border: 2px solid var(--color-secondary-gold);
+}
+
+button.secondary:hover:not(:disabled) {
+  background: var(--color-secondary-gold);
+  color: white;
+}
+
+button.danger {
+  background: var(--color-accent-crimson);
+  color: white;
+}
+
+button.danger:hover:not(:disabled) {
+  background: #a71624;
+  transform: translateY(-3px);
+}
+
+button.small {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: 14px;
+}
+
+button.large {
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: 18px;
+}
+
+/* Form Elements - Handmade feel */
+input, textarea, select {
+  width: 100%;
+  padding: var(--spacing-sm);
+  margin: var(--spacing-xs) 0;
+  border: 2px solid var(--color-secondary-gold);
+  border-radius: var(--radius-md);
+  font-size: 16px;
+  font-family: var(--font-primary);
+  background: var(--color-accent-ivory);
+  color: var(--color-neutral-black);
+  transition: all var(--transition-base);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--color-primary-sapphire);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05), 0 0 12px rgba(13, 59, 102, 0.25);
+}
+
+label {
+  display: block;
+  margin-bottom: var(--spacing-sm);
+  font-weight: 700;
+  color: var(--color-primary-sapphire);
+  font-family: var(--font-accent);
+  font-size: 14px;
+}
+
+/* Form Group */
+.form-group {
+  margin-bottom: var(--spacing-md);
+}
+
+/* Links */
+a {
+  color: var(--color-accent-crimson);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+}
+
+a:hover {
+  color: var(--color-secondary-gold);
+  border-bottom-color: var(--color-secondary-gold);
+}
+
+/* Cards/Containers */
+.card {
+  background: var(--color-accent-ivory);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base);
+  border-top: 4px solid var(--color-secondary-gold);
+  border-left: 4px solid var(--color-accent-crimson);
+  position: relative;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-secondary-gold), var(--color-secondary-bronze), var(--color-secondary-copper));
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+/* Messages/Alerts */
+.message {
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-md);
+  border-left: 4px solid;
+  border-top: 2px solid;
+  animation: slideIn var(--transition-base);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.error-message {
+  background-color: #ffe5e5;
+  color: var(--color-error);
+  border-left-color: var(--color-error);
+  border-top-color: var(--color-error);
+}
+
+.success-message {
+  background-color: #e8f5e9;
+  color: var(--color-success);
+  border-left-color: var(--color-success);
+  border-top-color: var(--color-success);
+}
+
+.warning-message {
+  background-color: #fff3e0;
+  color: var(--color-warning);
+  border-left-color: var(--color-warning);
+  border-top-color: var(--color-warning);
+}
+
+.info-message {
+  background-color: #e3f2fd;
+  color: var(--color-info);
+  border-left-color: var(--color-info);
+  border-top-color: var(--color-info);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 32px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  button {
+    width: 100%;
+  }
+}
