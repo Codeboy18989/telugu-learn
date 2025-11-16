@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import KidManagement from '../components/KidManagement';
+import ContentManagement from '../components/ContentManagement';
+import Learning from '../components/Learning';
 import '../styles/dashboard.css';
 
 function Dashboard() {
-  const { currentUser, logout } = useAuth();
+  const { logout, isSuperAdmin } = useAuth();
   const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState('kids');
 
   async function handleLogout() {
     try {
@@ -20,12 +23,36 @@ function Dashboard() {
   return (
     <div className="dashboard">
       <header className="dashboard-header">
-        <h1>తెలుగు Learn</h1>
+        <h1>తెలుగు Learn {isSuperAdmin && <span className="admin-badge">SUPER ADMIN</span>}</h1>
         <button onClick={handleLogout} className="logout-btn">Logout</button>
       </header>
 
+      {/* Navigation Tabs */}
+      <nav className="dashboard-nav">
+        <button
+          className={`nav-tab ${activeTab === 'kids' ? 'active' : ''}`}
+          onClick={() => setActiveTab('kids')}
+        >
+          👶 My Kids
+        </button>
+        <button
+          className={`nav-tab ${activeTab === 'content' ? 'active' : ''}`}
+          onClick={() => setActiveTab('content')}
+        >
+          📚 Content Library
+        </button>
+        <button
+          className={`nav-tab ${activeTab === 'learn' ? 'active' : ''}`}
+          onClick={() => setActiveTab('learn')}
+        >
+          🎓 Learn
+        </button>
+      </nav>
+
       <main>
-        <KidManagement />
+        {activeTab === 'kids' && <KidManagement />}
+        {activeTab === 'content' && <ContentManagement />}
+        {activeTab === 'learn' && <Learning />}
       </main>
     </div>
   );

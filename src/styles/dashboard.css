@@ -83,3 +83,108 @@
   color: var(--color-neutral-gray);
   margin: var(--spacing-md) 0;
 }
+
+/* Admin Badge */
+.admin-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--color-secondary-gold), var(--color-secondary-copper));
+  color: var(--color-primary-sapphire);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 900;
+  margin-left: 1rem;
+  letter-spacing: 1px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  border: 2px solid var(--color-neutral-white);
+}
+
+/* Navigation Tabs */
+.dashboard-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: linear-gradient(180deg, rgba(212, 175, 55, 0.1) 0%, transparent 100%);
+  border-bottom: 2px solid var(--color-secondary-gold);
+  flex-wrap: wrap;
+}
+
+.nav-tab {
+  padding: 0.75rem 2rem;
+  background: white;
+  border: 2px solid var(--color-secondary-gold);
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-primary-sapphire);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-tab:hover {
+  background: var(--color-secondary-gold);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.nav-tab.active {
+  background: linear-gradient(135deg, var(--color-primary-sapphire), var(--color-primary-emerald));
+  color: white;
+  border-color: var(--color-primary-sapphire);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Coming Soon Placeholder */
+.coming-soon {
+  max-width: 600px;
+  margin: 4rem auto;
+  text-align: center;
+  padding: 3rem;
+  background: white;
+  border: 2px solid var(--color-secondary-gold);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.coming-soon h2 {
+  color: var(--color-primary-sapphire);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.coming-soon p {
+  color: var(--color-neutral-gray);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dashboard-header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .dashboard-header h1 {
+    font-size: 24px;
+  }
+
+  .admin-badge {
+    display: block;
+    margin: 0.5rem auto 0;
+  }
+
+  .dashboard-nav {
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+
+  .nav-tab {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
