@@ -1,0 +1,278 @@
+.flashcard-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.flashcard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.flashcard-header h2 {
+  color: var(--color-primary-sapphire);
+  font-size: 2rem;
+  flex: 1;
+  text-align: center;
+}
+
+.progress {
+  background: var(--color-secondary-gold);
+  color: white;
+  padding: 0.5rem 1.25rem;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Flashcard */
+.flashcard-wrapper {
+  perspective: 1000px;
+  margin: 3rem auto;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flashcard {
+  width: 100%;
+  max-width: 600px;
+  height: 400px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+  cursor: pointer;
+}
+
+.flashcard.flipped {
+  transform: rotateY(180deg);
+}
+
+.flashcard-front,
+.flashcard-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.flashcard-front {
+  background: linear-gradient(135deg, var(--color-primary-sapphire) 0%, var(--color-primary-emerald) 100%);
+  border: 4px solid var(--color-secondary-gold);
+}
+
+.flashcard-back {
+  background: linear-gradient(135deg, var(--color-primary-emerald) 0%, var(--color-primary-sapphire) 100%);
+  border: 4px solid var(--color-secondary-copper);
+  transform: rotateY(180deg);
+}
+
+.card-content {
+  text-align: center;
+  width: 100%;
+}
+
+.telugu-word {
+  font-size: 4rem;
+  color: white;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+  line-height: 1.2;
+}
+
+.telugu-word-small {
+  font-size: 2rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+.english-word {
+  font-size: 3rem;
+  color: white;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.card-hint {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+.flip-hint {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  margin-top: 2rem;
+  font-style: italic;
+}
+
+.audio-btn-card {
+  background: var(--color-secondary-gold);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.audio-btn-card:hover {
+  background: var(--color-secondary-copper);
+  transform: scale(1.05);
+}
+
+/* Navigation */
+.flashcard-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.nav-btn {
+  padding: 0.75rem 2rem;
+  background: var(--color-primary-sapphire);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.nav-btn:hover:not(:disabled) {
+  background: var(--color-primary-emerald);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.nav-btn:disabled {
+  background: var(--color-neutral-gray);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.card-info {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.category-label,
+.preloaded-label {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.category-label {
+  background: var(--color-primary-emerald);
+  color: white;
+}
+
+.preloaded-label {
+  background: var(--color-secondary-gold);
+  color: white;
+}
+
+/* Progress Bar */
+.progress-bar-container {
+  width: 100%;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  margin-top: 2rem;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary-sapphire), var(--color-primary-emerald));
+  transition: width 0.3s ease;
+  border-radius: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .flashcard-container {
+    padding: 1rem;
+  }
+
+  .flashcard-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .flashcard {
+    height: 350px;
+  }
+
+  .telugu-word {
+    font-size: 3rem;
+  }
+
+  .english-word {
+    font-size: 2rem;
+  }
+
+  .telugu-word-small {
+    font-size: 1.5rem;
+  }
+
+  .nav-btn {
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .flashcard-navigation {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .flashcard {
+    height: 300px;
+  }
+
+  .telugu-word {
+    font-size: 2.5rem;
+  }
+
+  .english-word {
+    font-size: 1.75rem;
+  }
+
+  .audio-btn-card {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}

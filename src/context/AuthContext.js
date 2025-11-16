@@ -1,11 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { 
-  createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword, 
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
   signOut,
-  onAuthStateChanged 
+  onAuthStateChanged
 } from 'firebase/auth';
-import { auth } from '../config/firebase';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { auth, db } from '../config/firebase';
 
 const AuthContext = React.createContext();
 
@@ -15,12 +16,20 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   // Signup
-  function signup(email, password) {
-    return createUserWithEmailAndPassword(auth, email, password);
+  async function signup(email, password) {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    // Create parent document in Firestore
+    await setDoc(doc(db, 'parents', userCredential.user.uid), {
+      email: email,
+      isSuperAdmin: false,
+      createdAt: new Date()
+    });
+    return userCredential;
   }
 
   // Login
@@ -33,10 +42,30 @@ export function AuthProvider({ children }) {
     return signOut(auth);
   }
 
+  // Check if user is super admin
+  async function checkSuperAdmin(userId) {
+    try {
+      const parentDoc = await getDoc(doc(db, 'parents', userId));
+      if (parentDoc.exists()) {
+        return parentDoc.data().isSuperAdmin || false;
+      }
+      return false;
+    } catch (err) {
+      console.error('Error checking super admin status:', err);
+      return false;
+    }
+  }
+
   // Monitor auth state changes
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, user => {
+    const unsubscribe = onAuthStateChanged(auth, async user => {
       setCurrentUser(user);
+      if (user) {
+        const isAdmin = await checkSuperAdmin(user.uid);
+        setIsSuperAdmin(isAdmin);
+      } else {
+        setIsSuperAdmin(false);
+      }
       setLoading(false);
     }, error => {
       setError(error);
@@ -48,6 +77,7 @@ export function AuthProvider({ children }) {
 
   const value = {
     currentUser,
+    isSuperAdmin,
     signup,
     login,
     logout,
