@@ -1,30 +1,38 @@
-/* South Indian Silk Saree Inspired Theme - Vibrant & Bold */
-/* Handmade feel, woven textile backgrounds, golds & bronzes */
+/* South Indian Festival Inspired Theme - Turmeric, Marigold, Betel & Bindi */
+/* Modern meets traditional - vibrant, warm, and celebratory */
 
 :root {
-  /* Primary Colors - Jewel Tones */
-  --color-primary-sapphire: #0d3b66;
-  --color-primary-emerald: #2d6a4f;
-  --color-primary-amethyst: #5a189a;
-  
-  /* Secondary Colors - Golds & Bronzes */
-  --color-secondary-gold: #d4af37;
-  --color-secondary-bronze: #b8860b;
-  --color-secondary-copper: #d2691e;
-  --color-secondary-saffron: #ff9933;
-  
-  /* Accent Colors - Vibrant */
-  --color-accent-crimson: #c41e3a;
-  --color-accent-magenta: #d946a6;
-  --color-accent-coral: #ff6b6b;
-  --color-accent-ivory: #fef9f3;
-  --color-accent-charcoal: #2c2c2c;
-  
-  /* Neutral Colors */
-  --color-neutral-cream: #faf8f3;
-  --color-neutral-white: #ffffff;
-  --color-neutral-gray: #757575;
-  --color-neutral-gray-light: #f0ede5;
+  /* Primary Colors - Turmeric & Saffron */
+  --color-primary-turmeric: #FDB813;
+  --color-primary-saffron: #FF9933;
+  --color-primary-saffron-dark: #E67E22;
+  --color-primary-golden: #FFB84D;
+
+  /* Secondary Colors - Marigold */
+  --color-secondary-marigold-bright: #FFA500;
+  --color-secondary-marigold-orange: #FF8C00;
+  --color-secondary-marigold-yellow: #FFD700;
+  --color-secondary-marigold-deep: #FF6B00;
+
+  /* Tertiary Colors - Betel Leaf Green */
+  --color-tertiary-betel: #228B22;
+  --color-tertiary-betel-light: #32CD32;
+  --color-tertiary-betel-dark: #1B5E20;
+  --color-tertiary-leaf: #3CB371;
+
+  /* Accent Colors - Bindi & Traditional */
+  --color-accent-bindi-red: #C41E3A;
+  --color-accent-kumkum: #DC143C;
+  --color-accent-vermillion: #E34234;
+  --color-accent-coral: #FF6B6B;
+
+  /* Neutral Colors - Warm & Natural */
+  --color-neutral-cream: #FFF8E7;
+  --color-neutral-white: #FFFFFF;
+  --color-neutral-sand: #F5E6D3;
+  --color-neutral-ivory: #FFFFF0;
+  --color-neutral-gray: #6B6B6B;
+  --color-neutral-gray-light: #F0EDE5;
   --color-neutral-gray-dark: #424242;
   --color-neutral-black: #1a1a1a;
   
@@ -62,33 +70,48 @@
   --transition-fast: 150ms ease-in-out;
   --transition-base: 300ms ease-in-out;
   --transition-slow: 500ms ease-in-out;
+
+  /* Compatibility aliases for existing components */
+  --color-primary-sapphire: var(--color-tertiary-betel-dark);
+  --color-primary-emerald: var(--color-tertiary-betel);
+  --color-primary-amethyst: var(--color-accent-bindi-red);
+  --color-secondary-gold: var(--color-secondary-marigold-yellow);
+  --color-secondary-bronze: var(--color-primary-saffron-dark);
+  --color-secondary-copper: var(--color-secondary-marigold-orange);
+  --color-secondary-saffron: var(--color-primary-saffron);
+  --color-accent-crimson: var(--color-accent-bindi-red);
+  --color-accent-ivory: var(--color-neutral-ivory);
+
+  /* Additional compatibility */
+  --sapphire-primary: var(--color-tertiary-betel-dark);
+  --emerald-primary: var(--color-tertiary-betel);
+  --emerald-dark: var(--color-tertiary-betel-dark);
+  --emerald-light: var(--color-tertiary-betel-light);
+  --amethyst-primary: var(--color-accent-vermillion);
+  --amethyst-dark: var(--color-accent-bindi-red);
+  --amethyst-light: var(--color-accent-coral);
+  --gold-primary: var(--color-primary-turmeric);
+  --gold-accent: var(--color-secondary-marigold-yellow);
+  --crimson-primary: var(--color-accent-bindi-red);
+  --crimson-dark: var(--color-accent-kumkum);
+  --crimson-light: var(--color-accent-coral);
+  --sapphire-light: var(--color-tertiary-betel-light);
+  --sapphire-dark: var(--color-tertiary-betel-dark);
+  --text-primary: var(--color-neutral-black);
+  --text-secondary: var(--color-neutral-gray);
+  --surface-light: var(--color-neutral-white);
+  --border-color: var(--color-neutral-gray-light);
 }
 
-/* Woven textile inspired background */
+/* Betel leaf inspired background pattern */
 body {
   background-color: var(--color-neutral-cream);
-  background-image: 
-    repeating-linear-gradient(
-      0deg,
-      rgba(212, 175, 55, 0.03) 0px,
-      rgba(212, 175, 55, 0.03) 2px,
-      transparent 2px,
-      transparent 4px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      rgba(212, 175, 55, 0.03) 0px,
-      rgba(212, 175, 55, 0.03) 2px,
-      transparent 2px,
-      transparent 4px
-    ),
-    repeating-linear-gradient(
-      45deg,
-      transparent 0px,
-      transparent 4px,
-      rgba(13, 59, 102, 0.02) 4px,
-      rgba(13, 59, 102, 0.02) 8px
-    );
+  background-image:
+    /* Subtle betel leaf pattern */
+    radial-gradient(ellipse 40px 60px at 50% 50%, rgba(34, 139, 34, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse 35px 55px at 50% 50%, rgba(50, 205, 50, 0.02) 0%, transparent 50%);
+  background-size: 120px 140px, 100px 120px;
+  background-position: 0 0, 60px 70px;
   font-family: var(--font-primary);
   color: var(--color-neutral-black);
   line-height: 1.6;
