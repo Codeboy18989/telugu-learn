@@ -10,7 +10,7 @@
 }
 
 .content-header h2 {
-  color: var(--gold-primary);
+  color: var(--color-tertiary-betel-dark);
   font-size: 2rem;
   margin-bottom: 0.5rem;
 }
@@ -24,7 +24,7 @@
 .seed-btn {
   margin-top: 1rem;
   padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, var(--emerald-primary), var(--emerald-dark));
+  background: linear-gradient(135deg, var(--color-tertiary-betel), var(--color-tertiary-betel-dark));
   color: white;
   border: none;
   border-radius: 8px;
@@ -32,12 +32,13 @@
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(34, 139, 34, 0.3);
 }
 
 .seed-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--color-tertiary-betel-light), var(--color-tertiary-betel));
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 12px rgba(50, 205, 50, 0.4);
 }
 
 .seed-btn:disabled {
@@ -48,15 +49,15 @@
 /* Form Styling */
 .content-form {
   background: var(--surface-light);
-  border: 2px solid var(--gold-accent);
+  border: 3px solid var(--color-secondary-marigold-orange);
   border-radius: 12px;
   padding: 2rem;
   margin-bottom: 3rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(255, 140, 0, 0.2);
 }
 
 .content-form h3 {
-  color: var(--sapphire-primary);
+  color: var(--color-tertiary-betel-dark);
   margin-bottom: 1.5rem;
   font-size: 1.5rem;
 }
@@ -94,8 +95,8 @@
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
-  border-color: var(--sapphire-primary);
-  box-shadow: 0 0 0 3px var(--sapphire-light);
+  border-color: var(--color-primary-saffron);
+  box-shadow: 0 0 0 3px rgba(255, 153, 51, 0.2);
 }
 
 /* Audio Section */
@@ -118,24 +119,25 @@
 
 .file-upload-btn {
   padding: 0.75rem 1.5rem;
-  background: var(--emerald-primary);
+  background: linear-gradient(135deg, var(--color-tertiary-betel), var(--color-tertiary-betel-dark));
   color: white;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
   font-weight: 600;
   display: inline-block;
+  box-shadow: 0 3px 6px rgba(34, 139, 34, 0.3);
 }
 
 .file-upload-btn:hover {
-  background: var(--emerald-dark);
+  background: linear-gradient(135deg, var(--color-tertiary-betel-light), var(--color-tertiary-betel));
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 10px rgba(50, 205, 50, 0.4);
 }
 
 .record-btn {
   padding: 0.75rem 1.5rem;
-  background: var(--crimson-primary);
+  background: linear-gradient(135deg, var(--color-accent-bindi-red), var(--color-accent-kumkum));
   color: white;
   border: none;
   border-radius: 8px;
@@ -143,16 +145,17 @@
   transition: all 0.3s ease;
   font-weight: 600;
   font-size: 1rem;
+  box-shadow: 0 3px 6px rgba(196, 30, 58, 0.3);
 }
 
 .record-btn:hover {
-  background: var(--crimson-dark);
+  background: linear-gradient(135deg, var(--color-accent-kumkum), var(--color-accent-vermillion));
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 10px rgba(220, 20, 60, 0.4);
 }
 
 .record-btn.recording {
-  background: var(--crimson-dark);
+  background: linear-gradient(135deg, var(--color-accent-vermillion), var(--color-accent-kumkum));
   animation: pulse 1.5s infinite;
 }
 
@@ -166,7 +169,7 @@
 }
 
 .file-name {
-  color: var(--emerald-primary);
+  color: var(--color-tertiary-betel);
   font-weight: 600;
   font-size: 0.9rem;
 }
@@ -187,7 +190,7 @@
 .submit-btn {
   width: 100%;
   padding: 1rem;
-  background: linear-gradient(135deg, var(--sapphire-primary), var(--amethyst-primary));
+  background: linear-gradient(135deg, var(--color-primary-saffron), var(--color-secondary-marigold-deep));
   color: white;
   border: none;
   border-radius: 8px;
@@ -197,11 +200,13 @@
   transition: all 0.3s ease;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  box-shadow: 0 4px 10px rgba(255, 107, 0, 0.3);
 }
 
 .submit-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--color-secondary-marigold-orange), var(--color-primary-saffron-dark));
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 14px rgba(255, 140, 0, 0.4);
 }
 
 .submit-btn:disabled {
@@ -224,7 +229,7 @@
 }
 
 .content-list-header h3 {
-  color: var(--gold-primary);
+  color: var(--color-tertiary-betel-dark);
   font-size: 1.75rem;
 }
 
@@ -241,11 +246,18 @@
 
 .filter-group select {
   padding: 0.5rem 1rem;
-  border: 2px solid var(--border-color);
+  border: 2px solid var(--color-secondary-marigold-orange);
   border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
   background: white;
+  transition: all 0.3s ease;
+}
+
+.filter-group select:focus {
+  outline: none;
+  border-color: var(--color-primary-saffron);
+  box-shadow: 0 0 0 3px rgba(255, 153, 51, 0.2);
 }
 
 /* Content Grid */
@@ -257,33 +269,34 @@
 
 .content-card {
   background: white;
-  border: 2px solid var(--gold-accent);
+  border: 3px solid var(--color-primary-turmeric);
   border-radius: 12px;
   padding: 1.5rem;
   position: relative;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 8px rgba(253, 184, 19, 0.2);
 }
 
 .content-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  border-color: var(--sapphire-primary);
+  box-shadow: 0 6px 16px rgba(255, 140, 0, 0.3);
+  border-color: var(--color-secondary-marigold-orange);
+  background: linear-gradient(180deg, white, rgba(255, 165, 0, 0.03));
 }
 
 .preloaded-badge {
   position: absolute;
   top: -10px;
   right: 10px;
-  background: linear-gradient(135deg, var(--gold-primary), var(--gold-accent));
-  color: white;
+  background: linear-gradient(135deg, var(--color-primary-turmeric), var(--color-secondary-marigold-bright));
+  color: var(--color-tertiary-betel-dark);
   padding: 0.25rem 0.75rem;
   border-radius: 12px;
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 6px rgba(253, 184, 19, 0.4);
 }
 
 .content-text {
@@ -292,7 +305,7 @@
 
 .telugu-text {
   font-size: 1.75rem;
-  color: var(--sapphire-primary);
+  color: var(--color-tertiary-betel-dark);
   font-weight: 700;
   margin-bottom: 0.5rem;
   line-height: 1.3;
@@ -320,13 +333,14 @@
 }
 
 .age-badge {
-  background: var(--emerald-light);
-  color: var(--emerald-dark);
+  background: var(--color-tertiary-betel-light);
+  color: var(--color-tertiary-betel-dark);
 }
 
 .category-badge {
-  background: var(--amethyst-light);
-  color: var(--amethyst-dark);
+  background: rgba(255, 165, 0, 0.2);
+  color: var(--color-secondary-marigold-deep);
+  border: 1px solid var(--color-secondary-marigold-orange);
 }
 
 .content-actions {
@@ -347,45 +361,49 @@
 }
 
 .play-btn {
-  background: var(--sapphire-light);
-  color: var(--sapphire-dark);
+  background: rgba(253, 184, 19, 0.2);
+  color: var(--color-primary-saffron-dark);
+  border: 1px solid var(--color-primary-turmeric);
 }
 
 .play-btn:hover {
-  background: var(--sapphire-primary);
-  color: white;
+  background: linear-gradient(135deg, var(--color-primary-turmeric), var(--color-secondary-marigold-yellow));
+  color: var(--color-tertiary-betel-dark);
   transform: scale(1.05);
+  box-shadow: 0 2px 6px rgba(253, 184, 19, 0.4);
 }
 
 .delete-btn {
-  background: var(--crimson-light);
-  color: var(--crimson-dark);
+  background: rgba(196, 30, 58, 0.1);
+  color: var(--color-accent-bindi-red);
+  border: 1px solid var(--color-accent-kumkum);
 }
 
 .delete-btn:hover {
-  background: var(--crimson-primary);
+  background: linear-gradient(135deg, var(--color-accent-bindi-red), var(--color-accent-kumkum));
   color: white;
   transform: scale(1.05);
+  box-shadow: 0 2px 6px rgba(196, 30, 58, 0.4);
 }
 
 /* Messages */
 .error-message {
-  background: var(--crimson-light);
-  color: var(--crimson-dark);
+  background: rgba(196, 30, 58, 0.1);
+  color: var(--color-accent-bindi-red);
   padding: 1rem;
   border-radius: 8px;
   margin-bottom: 1.5rem;
-  border-left: 4px solid var(--crimson-primary);
+  border-left: 4px solid var(--color-accent-kumkum);
   font-weight: 600;
 }
 
 .success-message {
-  background: var(--emerald-light);
-  color: var(--emerald-dark);
+  background: rgba(34, 139, 34, 0.1);
+  color: var(--color-tertiary-betel-dark);
   padding: 1rem;
   border-radius: 8px;
   margin-bottom: 1.5rem;
-  border-left: 4px solid var(--emerald-primary);
+  border-left: 4px solid var(--color-tertiary-betel);
   font-weight: 600;
 }
 
