@@ -11,7 +11,6 @@ import {
   onSnapshot,
   serverTimestamp,
 } from 'firebase/firestore';
-import SilkSareeBorder from '../components/SilkSareeBorder';
 import '../styles/kidManagement.css';
 
 const AGE_GROUPS = [
@@ -112,17 +111,6 @@ function KidManagement() {
 
   return (
     <div className="kid-management">
-      {/* Decorative header with silk saree border */}
-      <SilkSareeBorder 
-        size="medium" 
-        colors={{ 
-          primary: '#0d3b66', 
-          gold: '#d4af37', 
-          accent: '#c41e3a' 
-        }} 
-        position="top" 
-      />
-
       <div className="kid-management-content">
         {/* Add Kid Form Section */}
         <div className="add-kid-section">
@@ -213,17 +201,6 @@ function KidManagement() {
           )}
         </div>
       </div>
-
-      {/* Decorative footer with silk saree border */}
-      <SilkSareeBorder 
-        size="medium" 
-        colors={{ 
-          primary: '#0d3b66', 
-          gold: '#d4af37', 
-          accent: '#c41e3a' 
-        }} 
-        position="bottom" 
-      />
     </div>
   );
 }

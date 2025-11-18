@@ -1,148 +1,112 @@
-/* Authentication Pages - South Indian Festival Aesthetic */
+/* Authentication Pages - Clean & Minimal */
 
 .auth-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--color-tertiary-betel-dark) 0%, var(--color-primary-saffron) 50%, var(--color-secondary-marigold-bright) 100%);
-  padding: var(--spacing-md);
-  position: relative;
-  overflow: hidden;
-}
-
-/* Woven textile pattern background */
-.auth-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: 
-    repeating-linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.05) 0px,
-      rgba(255, 255, 255, 0.05) 1px,
-      transparent 1px,
-      transparent 2px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.05) 0px,
-      rgba(255, 255, 255, 0.05) 1px,
-      transparent 1px,
-      transparent 2px
-    );
-  pointer-events: none;
+  background-color: #FAFAFA;
+  padding: 24px;
 }
 
 .auth-card {
-  background: var(--color-accent-ivory);
-  padding: var(--spacing-xl);
-  border-radius: var(--radius-lg);
-  box-shadow: 0 12px 32px rgba(255, 140, 0, 0.3);
+  background: white;
+  padding: 48px 40px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   width: 100%;
   max-width: 400px;
-  border-top: 6px solid var(--color-primary-turmeric);
-  border-left: 6px solid var(--color-secondary-marigold-orange);
-  position: relative;
-  z-index: 1;
-}
-
-.auth-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--color-primary-saffron), var(--color-secondary-marigold-orange), var(--color-primary-turmeric), var(--color-secondary-marigold-bright));
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  border: 1px solid #E5E7EB;
 }
 
 .auth-card h1 {
   text-align: center;
-  color: var(--color-primary-saffron);
-  margin-bottom: var(--spacing-sm);
-  font-size: 36px;
-  font-family: var(--font-accent);
-  text-shadow: 2px 2px 4px rgba(255, 107, 0, 0.2);
+  color: #1F2937;
+  margin-bottom: 8px;
+  font-size: 28px;
+  font-weight: 700;
 }
 
 .auth-card h2 {
   text-align: center;
-  color: var(--color-tertiary-betel-dark);
-  margin-bottom: var(--spacing-lg);
-  font-size: 22px;
-  font-weight: 700;
+  color: #6B7280;
+  margin-bottom: 32px;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .auth-card .form-group {
-  margin-bottom: var(--spacing-md);
+  margin-bottom: 20px;
 }
 
 .auth-card label {
   display: block;
-  margin-bottom: var(--spacing-sm);
-  font-weight: 700;
-  color: var(--color-tertiary-betel-dark);
-  font-family: var(--font-accent);
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #1F2937;
+  font-size: 14px;
 }
 
 .auth-card input {
-  border: 2px solid var(--color-secondary-marigold-orange);
-  border-radius: var(--radius-md);
-  background: var(--color-neutral-white);
-  color: var(--color-neutral-black);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid #D1D5DB;
+  border-radius: 8px;
+  background: white;
+  color: #1F2937;
+  padding: 12px;
+  font-size: 15px;
 }
 
 .auth-card input:focus {
-  border-color: var(--color-primary-saffron);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05), 0 0 12px rgba(255, 153, 51, 0.3);
+  border-color: #14BF96;
+  box-shadow: 0 0 0 3px rgba(20, 191, 150, 0.1);
 }
 
 .auth-card button {
   width: 100%;
-  margin-top: var(--spacing-md);
-  background: linear-gradient(135deg, var(--color-primary-saffron) 0%, var(--color-secondary-marigold-deep) 100%);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  box-shadow: 0 4px 10px rgba(255, 107, 0, 0.3);
+  margin-top: 8px;
+  background: #14BF96;
+  color: white;
+  padding: 12px 24px;
+  font-weight: 500;
+  border-radius: 8px;
 }
 
 .auth-card button:hover:not(:disabled) {
-  background: linear-gradient(135deg, var(--color-secondary-marigold-orange) 0%, var(--color-primary-saffron-dark) 100%);
-  transform: translateY(-3px);
-  box-shadow: 0 6px 14px rgba(255, 140, 0, 0.4);
+  background: #0FA881;
 }
 
 .error-message {
-  background-color: rgba(196, 30, 58, 0.1);
-  color: var(--color-accent-bindi-red);
-  padding: var(--spacing-md);
-  border-radius: var(--radius-md);
-  margin-bottom: var(--spacing-md);
-  border-left: 4px solid var(--color-accent-kumkum);
-  border-top: 2px solid var(--color-accent-bindi-red);
+  background-color: #FEF2F2;
+  color: #991B1B;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border-left: 3px solid #EF4444;
+  font-size: 14px;
 }
 
 .auth-card p {
   text-align: center;
-  margin-top: var(--spacing-lg);
-  color: var(--color-neutral-gray);
+  margin-top: 24px;
+  color: #6B7280;
   font-size: 14px;
 }
 
 .auth-card a {
-  color: var(--color-primary-saffron);
-  font-weight: 700;
-  border-bottom: 2px solid transparent;
-  transition: all var(--transition-fast);
+  color: #14BF96;
+  font-weight: 500;
 }
 
 .auth-card a:hover {
-  color: var(--color-secondary-marigold-orange);
-  border-bottom-color: var(--color-secondary-marigold-orange);
+  color: #0FA881;
+}
+
+@media (max-width: 768px) {
+  .auth-card {
+    padding: 32px 24px;
+  }
+
+  .auth-card h1 {
+    font-size: 24px;
+  }
 }

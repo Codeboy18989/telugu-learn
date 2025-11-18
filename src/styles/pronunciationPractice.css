@@ -1,33 +1,36 @@
+/* Pronunciation Practice - Clean & Minimal */
+
 .pronunciation-container {
   max-width: 900px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 32px;
 }
 
 .pronunciation-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 32px;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 16px;
 }
 
 .pronunciation-header h2 {
-  color: var(--color-tertiary-betel-dark);
-  font-size: 2rem;
+  color: #1F2937;
+  font-size: 24px;
   flex: 1;
   text-align: center;
+  font-weight: 700;
 }
 
 /* Practice Card */
 .practice-card {
   background: white;
-  border: 5px solid var(--color-secondary-marigold-orange);
-  border-radius: 20px;
-  padding: 3rem 2rem;
-  box-shadow: 0 8px 24px rgba(255, 140, 0, 0.3);
-  margin: 2rem 0;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  padding: 48px 32px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin: 32px 0;
   min-height: 450px;
   display: flex;
   align-items: center;
@@ -41,26 +44,24 @@
 
 /* Audio Section */
 .audio-section {
-  margin-bottom: 3rem;
+  margin-bottom: 48px;
 }
 
 .play-audio-btn {
-  background: linear-gradient(135deg, var(--color-primary-saffron), var(--color-secondary-marigold-deep));
+  background: #14BF96;
   color: white;
   border: none;
-  padding: 1.5rem 3rem;
-  border-radius: 50px;
+  padding: 20px 48px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 1.5rem;
-  font-weight: 700;
-  transition: all 0.3s ease;
-  box-shadow: 0 6px 16px rgba(255, 107, 0, 0.4);
+  font-size: 18px;
+  font-weight: 600;
+  transition: all 200ms ease;
 }
 
 .play-audio-btn:hover {
-  background: linear-gradient(135deg, var(--color-secondary-marigold-orange), var(--color-primary-saffron-dark));
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(255, 140, 0, 0.5);
+  background: #0FA881;
+  transform: scale(1.02);
 }
 
 .play-audio-btn:active {
@@ -68,15 +69,15 @@
 }
 
 .audio-instruction {
-  color: var(--color-neutral-gray);
-  font-size: 1.1rem;
-  margin-top: 1.5rem;
+  color: #6B7280;
+  font-size: 14px;
+  margin-top: 16px;
   font-style: italic;
 }
 
 /* Reveal Section */
 .reveal-section {
-  margin-bottom: 2rem;
+  margin-bottom: 32px;
   min-height: 200px;
   display: flex;
   align-items: center;
@@ -84,26 +85,24 @@
 }
 
 .reveal-btn {
-  background: linear-gradient(135deg, var(--color-primary-turmeric), var(--color-secondary-marigold-yellow));
-  color: var(--color-tertiary-betel-dark);
-  border: none;
-  padding: 1rem 2.5rem;
-  border-radius: 30px;
+  background: white;
+  color: #6B7280;
+  border: 1px solid #D1D5DB;
+  padding: 12px 32px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 1.2rem;
-  font-weight: 700;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(253, 184, 19, 0.4);
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 200ms ease;
 }
 
 .reveal-btn:hover {
-  background: linear-gradient(135deg, var(--color-secondary-marigold-orange), var(--color-primary-saffron));
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(255, 140, 0, 0.5);
+  background: #F9FAFB;
+  border-color: #9CA3AF;
 }
 
 .answer-display {
-  animation: fadeIn 0.5s ease;
+  animation: fadeIn 500ms ease;
 }
 
 @keyframes fadeIn {
@@ -118,92 +117,88 @@
 }
 
 .telugu-text-practice {
-  font-size: 4rem;
-  color: var(--color-tertiary-betel-dark);
+  font-size: 64px;
+  color: #1F2937;
   font-weight: 700;
-  margin-bottom: 1rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
 }
 
 .english-text-practice {
-  font-size: 2.5rem;
-  color: var(--color-primary-saffron);
+  font-size: 40px;
+  color: #6B7280;
   font-weight: 600;
-  margin-bottom: 1.5rem;
+  margin-bottom: 24px;
 }
 
 .category-badge-practice {
   display: inline-block;
-  background: linear-gradient(135deg, var(--color-primary-turmeric), var(--color-secondary-marigold-bright));
-  color: var(--color-tertiary-betel-dark);
-  padding: 0.5rem 1.5rem;
-  border-radius: 20px;
-  font-size: 1rem;
-  font-weight: 600;
+  background: #F0FDF4;
+  color: #166534;
+  padding: 8px 20px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 500;
   text-transform: capitalize;
-  box-shadow: 0 2px 6px rgba(253, 184, 19, 0.3);
+  border: 1px solid #BBF7D0;
 }
 
 /* Feedback Section */
 .feedback-section {
-  margin-top: 2rem;
-  animation: fadeIn 0.5s ease;
+  margin-top: 32px;
+  animation: fadeIn 500ms ease;
 }
 
 .feedback-instruction {
-  color: var(--color-neutral-gray);
-  font-size: 1.2rem;
+  color: #1F2937;
+  font-size: 16px;
   font-weight: 600;
-  margin-bottom: 1.5rem;
+  margin-bottom: 24px;
 }
 
 .feedback-buttons {
   display: flex;
-  gap: 1rem;
+  gap: 16px;
   justify-content: center;
   flex-wrap: wrap;
 }
 
 .correct-btn,
 .replay-btn {
-  padding: 1rem 2rem;
+  padding: 12px 32px;
   border: none;
-  border-radius: 25px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 1.1rem;
-  font-weight: 700;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 200ms ease;
 }
 
 .correct-btn {
-  background: linear-gradient(135deg, var(--color-tertiary-betel), var(--color-tertiary-betel-dark));
+  background: #14BF96;
   color: white;
 }
 
 .correct-btn:hover {
-  background: linear-gradient(135deg, var(--color-tertiary-betel-light), var(--color-tertiary-betel));
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(50, 205, 50, 0.4);
+  background: #0FA881;
 }
 
 .replay-btn {
-  background: linear-gradient(135deg, var(--color-accent-bindi-red), var(--color-accent-kumkum));
-  color: white;
+  background: white;
+  color: #6B7280;
+  border: 1px solid #D1D5DB;
 }
 
 .replay-btn:hover {
-  background: linear-gradient(135deg, var(--color-accent-kumkum), var(--color-accent-vermillion));
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(220, 20, 60, 0.4);
+  background: #F9FAFB;
+  border-color: #9CA3AF;
 }
 
 .success-indicator {
-  margin-top: 1.5rem;
-  font-size: 1.5rem;
-  color: var(--color-tertiary-betel);
-  font-weight: 700;
-  animation: bounceIn 0.6s ease;
+  margin-top: 24px;
+  font-size: 18px;
+  color: #10B981;
+  font-weight: 600;
+  animation: bounceIn 600ms ease;
 }
 
 @keyframes bounceIn {
@@ -211,7 +206,7 @@
     transform: scale(0);
   }
   50% {
-    transform: scale(1.1);
+    transform: scale(1.05);
   }
   100% {
     transform: scale(1);
@@ -223,32 +218,31 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 2rem;
-  gap: 1rem;
+  margin-top: 32px;
+  gap: 16px;
   flex-wrap: wrap;
 }
 
 .score-display {
-  background: linear-gradient(135deg, var(--color-primary-saffron), var(--color-secondary-marigold-orange));
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 20px;
-  font-weight: 700;
-  font-size: 1.1rem;
-  box-shadow: 0 3px 8px rgba(255, 107, 0, 0.3);
+  background: #F0FDF4;
+  color: #166534;
+  padding: 10px 20px;
+  border-radius: 16px;
+  font-weight: 600;
+  font-size: 14px;
+  border: 1px solid #BBF7D0;
 }
 
 /* Completion Message */
 .completion-message {
-  background: linear-gradient(135deg, var(--color-tertiary-betel), var(--color-primary-saffron), var(--color-secondary-marigold-bright));
-  color: white;
-  padding: 2rem;
-  border-radius: 16px;
+  background: white;
+  border: 1px solid #E5E7EB;
+  padding: 32px;
+  border-radius: 12px;
   text-align: center;
-  margin-top: 2rem;
-  box-shadow: 0 8px 20px rgba(255, 140, 0, 0.4);
-  animation: slideUp 0.6s ease;
-  border: 3px solid var(--color-primary-turmeric);
+  margin-top: 32px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  animation: slideUp 600ms ease;
 }
 
 @keyframes slideUp {
@@ -263,40 +257,42 @@
 }
 
 .completion-message h3 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+  font-size: 24px;
+  margin-bottom: 8px;
+  color: #1F2937;
 }
 
 .completion-message p {
-  font-size: 1.2rem;
+  font-size: 16px;
+  color: #6B7280;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .pronunciation-container {
-    padding: 1rem;
+    padding: 16px;
   }
 
   .pronunciation-header h2 {
-    font-size: 1.5rem;
+    font-size: 20px;
   }
 
   .practice-card {
-    padding: 2rem 1.5rem;
+    padding: 32px 24px;
     min-height: 400px;
   }
 
   .play-audio-btn {
-    padding: 1.25rem 2.5rem;
-    font-size: 1.25rem;
+    padding: 16px 40px;
+    font-size: 16px;
   }
 
   .telugu-text-practice {
-    font-size: 3rem;
+    font-size: 48px;
   }
 
   .english-text-practice {
-    font-size: 2rem;
+    font-size: 32px;
   }
 
   .feedback-buttons {
@@ -319,23 +315,23 @@
 
 @media (max-width: 480px) {
   .practice-card {
-    padding: 1.5rem 1rem;
+    padding: 24px 16px;
   }
 
   .play-audio-btn {
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
+    padding: 14px 32px;
+    font-size: 15px;
   }
 
   .telugu-text-practice {
-    font-size: 2.5rem;
+    font-size: 40px;
   }
 
   .english-text-practice {
-    font-size: 1.5rem;
+    font-size: 24px;
   }
 
   .completion-message h3 {
-    font-size: 1.5rem;
+    font-size: 20px;
   }
 }
