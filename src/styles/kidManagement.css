@@ -1,5 +1,5 @@
-/* Kid Management Component - South Indian Silk Saree Aesthetic */
-/* Vibrant, Bold, Handmade Feel */
+/* Kid Management Component - South Indian Festival Aesthetic */
+/* Turmeric, Saffron, Marigold, Betel Green */
 
 .kid-management {
   padding: 0;
@@ -17,7 +17,7 @@
 }
 
 .add-kid-section h2 {
-  color: var(--color-primary-sapphire);
+  color: var(--color-tertiary-betel-dark);
   margin-bottom: var(--spacing-lg);
   font-family: var(--font-accent);
   font-size: 28px;
@@ -28,9 +28,9 @@
   background: var(--color-accent-ivory);
   padding: var(--spacing-lg);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  border-top: 4px solid var(--color-secondary-gold);
-  border-left: 4px solid var(--color-accent-crimson);
+  box-shadow: 0 4px 10px rgba(255, 140, 0, 0.2);
+  border-top: 4px solid var(--color-primary-turmeric);
+  border-left: 4px solid var(--color-secondary-marigold-orange);
   position: relative;
 }
 
@@ -41,7 +41,7 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, var(--color-secondary-gold), var(--color-secondary-bronze), var(--color-secondary-copper));
+  background: linear-gradient(90deg, var(--color-primary-saffron), var(--color-secondary-marigold-orange), var(--color-primary-turmeric));
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 
@@ -60,7 +60,7 @@
 .form-group label {
   margin-bottom: var(--spacing-sm);
   font-weight: 700;
-  color: var(--color-primary-sapphire);
+  color: var(--color-tertiary-betel-dark);
   font-family: var(--font-accent);
   font-size: 14px;
   text-transform: uppercase;
@@ -70,7 +70,7 @@
 .form-group input,
 .form-group select {
   padding: var(--spacing-sm);
-  border: 2px solid var(--color-secondary-gold);
+  border: 2px solid var(--color-secondary-marigold-orange);
   border-radius: var(--radius-md);
   font-size: 16px;
   font-family: var(--font-primary);
@@ -83,8 +83,8 @@
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
-  border-color: var(--color-primary-sapphire);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05), 0 0 12px rgba(13, 59, 102, 0.25);
+  border-color: var(--color-primary-saffron);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05), 0 0 12px rgba(255, 153, 51, 0.3);
 }
 
 .form-group-button {
@@ -93,7 +93,7 @@
 }
 
 .add-btn {
-  background: linear-gradient(135deg, var(--color-primary-sapphire) 0%, var(--color-secondary-gold) 100%);
+  background: linear-gradient(135deg, var(--color-primary-saffron) 0%, var(--color-secondary-marigold-deep) 100%);
   color: white;
   padding: var(--spacing-sm) var(--spacing-lg);
   border: none;
@@ -104,14 +104,14 @@
   white-space: nowrap;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 10px rgba(255, 107, 0, 0.3);
   font-size: 14px;
 }
 
 .add-btn:hover {
   transform: translateY(-3px);
-  box-shadow: var(--shadow-lg);
-  background: linear-gradient(135deg, var(--color-secondary-gold) 0%, var(--color-primary-sapphire) 100%);
+  box-shadow: 0 6px 14px rgba(255, 140, 0, 0.4);
+  background: linear-gradient(135deg, var(--color-secondary-marigold-orange) 0%, var(--color-primary-saffron-dark) 100%);
 }
 
 .add-btn:active {
@@ -140,17 +140,17 @@
 }
 
 .error-message {
-  background-color: #ffe5e5;
-  color: var(--color-error);
-  border-left-color: var(--color-error);
-  border-top-color: var(--color-error);
+  background-color: rgba(196, 30, 58, 0.1);
+  color: var(--color-accent-bindi-red);
+  border-left-color: var(--color-accent-kumkum);
+  border-top-color: var(--color-accent-bindi-red);
 }
 
 .success-message {
-  background-color: #e8f5e9;
-  color: var(--color-success);
-  border-left-color: var(--color-success);
-  border-top-color: var(--color-success);
+  background-color: rgba(34, 139, 34, 0.1);
+  color: var(--color-tertiary-betel-dark);
+  border-left-color: var(--color-tertiary-betel);
+  border-top-color: var(--color-tertiary-betel-dark);
 }
 
 /* Kids List Section */
@@ -159,7 +159,7 @@
 }
 
 .kids-list-section h2 {
-  color: var(--color-primary-sapphire);
+  color: var(--color-tertiary-betel-dark);
   margin-bottom: var(--spacing-lg);
   font-family: var(--font-accent);
   font-size: 28px;
@@ -174,8 +174,8 @@
   padding: var(--spacing-xl);
   background: var(--color-accent-ivory);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  border-left: 4px solid var(--color-secondary-gold);
+  box-shadow: 0 2px 6px rgba(253, 184, 19, 0.2);
+  border-left: 4px solid var(--color-primary-turmeric);
 }
 
 /* Kids Grid */
@@ -190,9 +190,9 @@
   background: var(--color-accent-ivory);
   border-radius: var(--radius-lg);
   padding: var(--spacing-lg);
-  box-shadow: var(--shadow-md);
-  border-top: 6px solid var(--color-secondary-gold);
-  border-left: 6px solid var(--color-accent-crimson);
+  box-shadow: 0 4px 10px rgba(255, 140, 0, 0.2);
+  border-top: 6px solid var(--color-primary-turmeric);
+  border-left: 6px solid var(--color-secondary-marigold-orange);
   transition: all var(--transition-base);
   display: flex;
   flex-direction: column;
@@ -206,12 +206,12 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--color-secondary-gold), var(--color-secondary-bronze), var(--color-secondary-copper));
+  background: linear-gradient(90deg, var(--color-primary-saffron), var(--color-secondary-marigold-orange), var(--color-primary-turmeric));
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 
 .kid-card:hover {
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 8px 20px rgba(255, 140, 0, 0.4);
   transform: translateY(-6px);
 }
 
@@ -220,12 +220,12 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: var(--spacing-md);
-  border-bottom: 2px dashed var(--color-secondary-gold);
+  border-bottom: 2px dashed var(--color-secondary-marigold-yellow);
   padding-bottom: var(--spacing-md);
 }
 
 .kid-card-header h3 {
-  color: var(--color-primary-sapphire);
+  color: var(--color-tertiary-betel-dark);
   font-size: 24px;
   margin: 0;
   font-family: var(--font-accent);
@@ -249,10 +249,10 @@
 }
 
 .delete-btn:hover {
-  background: var(--color-accent-crimson);
+  background: var(--color-accent-bindi-red);
   color: white;
   transform: scale(1.15) rotate(90deg);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 2px 6px rgba(196, 30, 58, 0.4);
 }
 
 /* Kid Card Body */
@@ -265,17 +265,17 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(196, 30, 58, 0.1));
+  background: linear-gradient(135deg, rgba(253, 184, 19, 0.15), rgba(255, 165, 0, 0.1));
   padding: var(--spacing-md);
   border-radius: var(--radius-md);
-  border-left: 4px solid var(--color-secondary-gold);
-  border-top: 2px solid var(--color-accent-crimson);
+  border-left: 4px solid var(--color-primary-turmeric);
+  border-top: 2px solid var(--color-secondary-marigold-orange);
 }
 
 .age-label {
   font-size: 12px;
   font-weight: 700;
-  color: var(--color-primary-sapphire);
+  color: var(--color-tertiary-betel-dark);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -283,13 +283,13 @@
 .age-value {
   font-size: 16px;
   font-weight: 700;
-  color: var(--color-secondary-gold);
+  color: var(--color-primary-saffron);
   font-family: var(--font-accent);
 }
 
 /* Kid Card Footer */
 .kid-card-footer {
-  border-top: 1px dashed var(--color-secondary-bronze);
+  border-top: 1px dashed var(--color-secondary-marigold-yellow);
   padding-top: var(--spacing-md);
 }
 
