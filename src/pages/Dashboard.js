@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import KidManagement from '../components/KidManagement';
 import ContentManagement from '../components/ContentManagement';
 import Learning from '../components/Learning';
+import { MarigoldGarland } from '../components/MarigoldFlower';
 import '../styles/dashboard.css';
 
 function Dashboard() {
@@ -23,8 +24,13 @@ function Dashboard() {
   return (
     <div className="dashboard">
       <header className="dashboard-header">
-        <h1>తెలుగు Learn {isSuperAdmin && <span className="admin-badge">SUPER ADMIN</span>}</h1>
-        <button onClick={handleLogout} className="logout-btn">Logout</button>
+        <div className="header-content">
+          <h1>తెలుగు Learn {isSuperAdmin && <span className="admin-badge">SUPER ADMIN</span>}</h1>
+          <button onClick={handleLogout} className="logout-btn">Logout</button>
+        </div>
+        <div className="header-garland">
+          <MarigoldGarland count={8} />
+        </div>
       </header>
 
       {/* Navigation Tabs */}

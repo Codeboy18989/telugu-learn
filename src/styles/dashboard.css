@@ -1,75 +1,62 @@
-/* Dashboard - South Indian Silk Saree Aesthetic */
+/* Dashboard - South Indian Festival Aesthetic */
 
 .dashboard {
   min-height: 100vh;
   background-color: var(--color-neutral-cream);
-  background-image: 
-    repeating-linear-gradient(
-      0deg,
-      rgba(212, 175, 55, 0.03) 0px,
-      rgba(212, 175, 55, 0.03) 2px,
-      transparent 2px,
-      transparent 4px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      rgba(212, 175, 55, 0.03) 0px,
-      rgba(212, 175, 55, 0.03) 2px,
-      transparent 2px,
-      transparent 4px
-    );
 }
 
 .dashboard-header {
-  background: linear-gradient(135deg, var(--color-primary-sapphire) 0%, var(--color-primary-emerald) 50%, var(--color-secondary-bronze) 100%);
+  background: linear-gradient(135deg, var(--color-tertiary-betel-dark) 0%, var(--color-tertiary-betel) 50%, var(--color-primary-saffron) 100%);
   color: var(--color-neutral-white);
-  padding: var(--spacing-lg) var(--spacing-xl);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: var(--shadow-lg);
-  border-bottom: 4px solid var(--color-secondary-gold);
+  padding: var(--spacing-md) var(--spacing-xl);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-bottom: 3px solid var(--color-primary-turmeric);
   position: relative;
 }
 
-.dashboard-header::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--color-secondary-gold), var(--color-secondary-copper), var(--color-secondary-bronze));
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.header-garland {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 0;
+  overflow-x: auto;
 }
 
 .dashboard-header h1 {
   font-size: 32px;
   margin: 0;
-  color: var(--color-secondary-gold);
+  color: var(--color-primary-turmeric);
   font-family: var(--font-accent);
-  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
   letter-spacing: 1px;
 }
 
 .logout-btn {
-  background: var(--color-accent-crimson);
+  background: var(--color-accent-bindi-red);
   color: var(--color-neutral-white);
   padding: var(--spacing-sm) var(--spacing-lg);
   border-radius: var(--radius-md);
   cursor: pointer;
   font-weight: 700;
-  border: 2px solid var(--color-accent-ivory);
+  border: 2px solid var(--color-neutral-ivory);
   transition: all var(--transition-base);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-size: 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .logout-btn:hover {
-  background: var(--color-secondary-gold);
-  color: var(--color-primary-sapphire);
+  background: var(--color-primary-turmeric);
+  color: var(--color-tertiary-betel-dark);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .dashboard-content {
@@ -87,8 +74,8 @@
 /* Admin Badge */
 .admin-badge {
   display: inline-block;
-  background: linear-gradient(135deg, var(--color-secondary-gold), var(--color-secondary-copper));
-  color: var(--color-primary-sapphire);
+  background: linear-gradient(135deg, var(--color-primary-turmeric), var(--color-secondary-marigold-bright));
+  color: var(--color-tertiary-betel-dark);
   padding: 0.25rem 0.75rem;
   border-radius: 20px;
   font-size: 0.7rem;
@@ -105,36 +92,37 @@
   justify-content: center;
   gap: 1rem;
   padding: 1.5rem;
-  background: linear-gradient(180deg, rgba(212, 175, 55, 0.1) 0%, transparent 100%);
-  border-bottom: 2px solid var(--color-secondary-gold);
+  background: linear-gradient(180deg, rgba(253, 184, 19, 0.08) 0%, transparent 100%);
+  border-bottom: 3px solid var(--color-primary-turmeric);
   flex-wrap: wrap;
 }
 
 .nav-tab {
   padding: 0.75rem 2rem;
   background: white;
-  border: 2px solid var(--color-secondary-gold);
+  border: 3px solid var(--color-secondary-marigold-orange);
   border-radius: 25px;
   cursor: pointer;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--color-primary-sapphire);
+  color: var(--color-tertiary-betel-dark);
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(255, 140, 0, 0.2);
 }
 
 .nav-tab:hover {
-  background: var(--color-secondary-gold);
-  color: white;
+  background: linear-gradient(135deg, var(--color-secondary-marigold-yellow), var(--color-primary-turmeric));
+  color: var(--color-tertiary-betel-dark);
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(255, 140, 0, 0.4);
+  border-color: var(--color-primary-turmeric);
 }
 
 .nav-tab.active {
-  background: linear-gradient(135deg, var(--color-primary-sapphire), var(--color-primary-emerald));
+  background: linear-gradient(135deg, var(--color-primary-saffron), var(--color-secondary-marigold-orange));
   color: white;
-  border-color: var(--color-primary-sapphire);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border-color: var(--color-primary-saffron-dark);
+  box-shadow: 0 4px 12px rgba(255, 107, 0, 0.4);
 }
 
 /* Coming Soon Placeholder */
@@ -163,7 +151,7 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .dashboard-header {
+  .header-content {
     flex-direction: column;
     gap: 1rem;
     text-align: center;
@@ -176,6 +164,20 @@
   .admin-badge {
     display: block;
     margin: 0.5rem auto 0;
+  }
+
+  .header-garland {
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+  }
+
+  .header-garland::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .header-garland::-webkit-scrollbar-thumb {
+    background: var(--color-primary-turmeric);
+    border-radius: 2px;
   }
 
   .dashboard-nav {
