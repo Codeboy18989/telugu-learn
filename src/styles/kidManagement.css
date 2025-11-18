@@ -1,54 +1,39 @@
-/* Kid Management Component - South Indian Festival Aesthetic */
-/* Turmeric, Saffron, Marigold, Betel Green */
+/* Kid Management - Clean & Minimal */
 
 .kid-management {
   padding: 0;
 }
 
 .kid-management-content {
-  padding: var(--spacing-xl);
+  padding: 32px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 /* Add Kid Section */
 .add-kid-section {
-  margin-bottom: var(--spacing-xxl);
+  margin-bottom: 48px;
 }
 
 .add-kid-section h2 {
-  color: var(--color-tertiary-betel-dark);
-  margin-bottom: var(--spacing-lg);
-  font-family: var(--font-accent);
-  font-size: 28px;
+  color: #1F2937;
+  margin-bottom: 24px;
+  font-size: 24px;
   font-weight: 700;
 }
 
 .add-kid-form {
-  background: var(--color-accent-ivory);
-  padding: var(--spacing-lg);
-  border-radius: var(--radius-lg);
-  box-shadow: 0 4px 10px rgba(255, 140, 0, 0.2);
-  border-top: 4px solid var(--color-primary-turmeric);
-  border-left: 4px solid var(--color-secondary-marigold-orange);
-  position: relative;
-}
-
-.add-kid-form::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--color-primary-saffron), var(--color-secondary-marigold-orange), var(--color-primary-turmeric));
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid #E5E7EB;
 }
 
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr auto;
-  gap: var(--spacing-md);
+  gap: 16px;
   align-items: flex-end;
 }
 
@@ -58,33 +43,28 @@
 }
 
 .form-group label {
-  margin-bottom: var(--spacing-sm);
-  font-weight: 700;
-  color: var(--color-tertiary-betel-dark);
-  font-family: var(--font-accent);
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #1F2937;
   font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
 .form-group input,
 .form-group select {
-  padding: var(--spacing-sm);
-  border: 2px solid var(--color-secondary-marigold-orange);
-  border-radius: var(--radius-md);
-  font-size: 16px;
-  font-family: var(--font-primary);
-  background: var(--color-neutral-white);
-  color: var(--color-neutral-black);
-  transition: all var(--transition-base);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  padding: 12px;
+  border: 1px solid #D1D5DB;
+  border-radius: 8px;
+  font-size: 15px;
+  background: white;
+  color: #1F2937;
+  transition: all 200ms ease;
 }
 
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
-  border-color: var(--color-primary-saffron);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05), 0 0 12px rgba(255, 153, 51, 0.3);
+  border-color: #14BF96;
+  box-shadow: 0 0 0 3px rgba(20, 191, 150, 0.1);
 }
 
 .form-group-button {
@@ -93,209 +73,171 @@
 }
 
 .add-btn {
-  background: linear-gradient(135deg, var(--color-primary-saffron) 0%, var(--color-secondary-marigold-deep) 100%);
+  background: #14BF96;
   color: white;
-  padding: var(--spacing-sm) var(--spacing-lg);
+  padding: 12px 24px;
   border: none;
-  border-radius: var(--radius-md);
-  font-weight: 700;
+  border-radius: 8px;
+  font-weight: 500;
   cursor: pointer;
-  transition: all var(--transition-base);
+  transition: all 200ms ease;
   white-space: nowrap;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  box-shadow: 0 4px 10px rgba(255, 107, 0, 0.3);
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .add-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 14px rgba(255, 140, 0, 0.4);
-  background: linear-gradient(135deg, var(--color-secondary-marigold-orange) 0%, var(--color-primary-saffron-dark) 100%);
+  background: #0FA881;
 }
 
 .add-btn:active {
-  transform: translateY(-1px);
+  transform: scale(0.98);
 }
 
 /* Messages */
 .message {
-  padding: var(--spacing-md);
-  border-radius: var(--radius-md);
-  margin-top: var(--spacing-md);
-  border-left: 4px solid;
-  border-top: 2px solid;
-  animation: slideIn var(--transition-base);
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  padding: 16px;
+  border-radius: 8px;
+  margin-top: 16px;
+  border-left: 3px solid;
 }
 
 .error-message {
-  background-color: rgba(196, 30, 58, 0.1);
-  color: var(--color-accent-bindi-red);
-  border-left-color: var(--color-accent-kumkum);
-  border-top-color: var(--color-accent-bindi-red);
+  background-color: #FEF2F2;
+  color: #991B1B;
+  border-left-color: #EF4444;
 }
 
 .success-message {
-  background-color: rgba(34, 139, 34, 0.1);
-  color: var(--color-tertiary-betel-dark);
-  border-left-color: var(--color-tertiary-betel);
-  border-top-color: var(--color-tertiary-betel-dark);
+  background-color: #F0FDF4;
+  color: #166534;
+  border-left-color: #10B981;
 }
 
 /* Kids List Section */
 .kids-list-section {
-  margin-top: var(--spacing-xxl);
+  margin-top: 48px;
 }
 
 .kids-list-section h2 {
-  color: var(--color-tertiary-betel-dark);
-  margin-bottom: var(--spacing-lg);
-  font-family: var(--font-accent);
-  font-size: 28px;
+  color: #1F2937;
+  margin-bottom: 24px;
+  font-size: 24px;
   font-weight: 700;
 }
 
 .loading,
 .empty-state {
   text-align: center;
-  color: var(--color-neutral-gray);
-  font-size: 18px;
-  padding: var(--spacing-xl);
-  background: var(--color-accent-ivory);
-  border-radius: var(--radius-lg);
-  box-shadow: 0 2px 6px rgba(253, 184, 19, 0.2);
-  border-left: 4px solid var(--color-primary-turmeric);
+  color: #6B7280;
+  font-size: 16px;
+  padding: 48px 32px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid #E5E7EB;
 }
 
 /* Kids Grid */
 .kids-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: var(--spacing-lg);
+  gap: 24px;
 }
 
-/* Kid Card - Bold & Colorful */
+/* Kid Card - Clean & Simple */
 .kid-card {
-  background: var(--color-accent-ivory);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-lg);
-  box-shadow: 0 4px 10px rgba(255, 140, 0, 0.2);
-  border-top: 6px solid var(--color-primary-turmeric);
-  border-left: 6px solid var(--color-secondary-marigold-orange);
-  transition: all var(--transition-base);
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid #E5E7EB;
+  transition: all 200ms ease;
   display: flex;
   flex-direction: column;
-  position: relative;
-}
-
-.kid-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--color-primary-saffron), var(--color-secondary-marigold-orange), var(--color-primary-turmeric));
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 
 .kid-card:hover {
-  box-shadow: 0 8px 20px rgba(255, 140, 0, 0.4);
-  transform: translateY(-6px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-color: #14BF96;
 }
 
 .kid-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--spacing-md);
-  border-bottom: 2px dashed var(--color-secondary-marigold-yellow);
-  padding-bottom: var(--spacing-md);
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #F3F4F6;
 }
 
 .kid-card-header h3 {
-  color: var(--color-tertiary-betel-dark);
-  font-size: 24px;
+  color: #1F2937;
+  font-size: 20px;
   margin: 0;
-  font-family: var(--font-accent);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .delete-btn {
-  background: none;
-  border: none;
-  font-size: 24px;
-  color: var(--color-neutral-gray);
+  background: white;
+  border: 1px solid #E5E7EB;
+  font-size: 18px;
+  color: #6B7280;
   cursor: pointer;
-  padding: 0;
+  padding: 8px;
   width: 36px;
   height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-md);
-  transition: all var(--transition-base);
+  border-radius: 8px;
+  transition: all 200ms ease;
 }
 
 .delete-btn:hover {
-  background: var(--color-accent-bindi-red);
-  color: white;
-  transform: scale(1.15) rotate(90deg);
-  box-shadow: 0 2px 6px rgba(196, 30, 58, 0.4);
+  background: #FEF2F2;
+  color: #EF4444;
+  border-color: #FEE2E2;
 }
 
 /* Kid Card Body */
 .kid-card-body {
   flex-grow: 1;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: 16px;
 }
 
 .age-badge {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
-  background: linear-gradient(135deg, rgba(253, 184, 19, 0.15), rgba(255, 165, 0, 0.1));
-  padding: var(--spacing-md);
-  border-radius: var(--radius-md);
-  border-left: 4px solid var(--color-primary-turmeric);
-  border-top: 2px solid var(--color-secondary-marigold-orange);
+  gap: 8px;
+  background: #F9FAFB;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #E5E7EB;
 }
 
 .age-label {
   font-size: 12px;
-  font-weight: 700;
-  color: var(--color-tertiary-betel-dark);
+  font-weight: 600;
+  color: #6B7280;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .age-value {
   font-size: 16px;
-  font-weight: 700;
-  color: var(--color-primary-saffron);
-  font-family: var(--font-accent);
+  font-weight: 600;
+  color: #1F2937;
 }
 
 /* Kid Card Footer */
 .kid-card-footer {
-  border-top: 1px dashed var(--color-secondary-marigold-yellow);
-  padding-top: var(--spacing-md);
+  border-top: 1px solid #F3F4F6;
+  padding-top: 16px;
 }
 
 .created-text {
   font-size: 12px;
-  color: var(--color-neutral-gray);
+  color: #9CA3AF;
   margin: 0;
   font-style: italic;
 }
@@ -304,7 +246,7 @@
 @media (max-width: 768px) {
   .form-row {
     grid-template-columns: 1fr;
-    gap: var(--spacing-md);
+    gap: 16px;
   }
 
   .form-group-button {
@@ -320,7 +262,7 @@
   }
 
   .kid-management-content {
-    padding: var(--spacing-lg);
+    padding: 24px 16px;
   }
 }
 
@@ -328,11 +270,11 @@
   .kid-card-header {
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--spacing-md);
+    gap: 16px;
   }
 
   .kid-card-header h3 {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .delete-btn {
