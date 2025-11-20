@@ -90,8 +90,24 @@
   font-size: 64px;
   color: #1F2937;
   font-weight: 700;
-  margin-bottom: 24px;
+  margin-bottom: 12px;
   line-height: 1.2;
+}
+
+.transliteration {
+  font-size: 24px;
+  color: #6B7280;
+  font-style: italic;
+  font-weight: 400;
+  margin-bottom: 24px;
+}
+
+.transliteration-small {
+  font-size: 20px;
+  color: #9CA3AF;
+  font-style: italic;
+  font-weight: 400;
+  margin-bottom: 12px;
 }
 
 .telugu-word-small {

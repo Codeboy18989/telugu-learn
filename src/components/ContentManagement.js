@@ -11,7 +11,11 @@ import { getSeedContent } from '../utils/seedContent';
 import '../styles/contentManagement.css';
 
 const AGE_GROUPS = ['2-4', '4+', '8+'];
-const CATEGORIES = ['words', 'phrases'];
+const CATEGORIES = [
+  'family', 'food', 'animals', 'nature', 'objects', 'body',
+  'colors', 'numbers', 'actions', 'time',
+  'phrases', 'sentences'
+];
 
 export default function ContentManagement() {
   const { currentUser, isSuperAdmin } = useAuth();
@@ -22,9 +26,10 @@ export default function ContentManagement() {
 
   // Form state
   const [teluguText, setTeluguText] = useState('');
+  const [transliteration, setTransliteration] = useState('');
   const [englishTranslation, setEnglishTranslation] = useState('');
   const [ageGroup, setAgeGroup] = useState('2-4');
-  const [category, setCategory] = useState('words');
+  const [category, setCategory] = useState('family');
   const [audioFile, setAudioFile] = useState(null);
   const [audioUrl, setAudioUrl] = useState('');
   const [uploading, setUploading] = useState(false);
@@ -89,6 +94,7 @@ export default function ContentManagement() {
 
       const contentData = {
         teluguText,
+        transliteration,
         englishTranslation,
         ageGroup,
         category,
@@ -101,9 +107,10 @@ export default function ContentManagement() {
 
       // Reset form
       setTeluguText('');
+      setTransliteration('');
       setEnglishTranslation('');
       setAgeGroup('2-4');
-      setCategory('words');
+      setCategory('family');
       setAudioFile(null);
       setAudioUrl('');
       setRecordedBlob(null);
@@ -289,6 +296,20 @@ export default function ContentManagement() {
             />
           </div>
 
+          <div className="form-group">
+            <label htmlFor="transliteration">Transliteration</label>
+            <input
+              type="text"
+              id="transliteration"
+              value={transliteration}
+              onChange={(e) => setTransliteration(e.target.value)}
+              placeholder="amma"
+              maxLength={100}
+            />
+          </div>
+        </div>
+
+        <div className="form-row">
           <div className="form-group">
             <label htmlFor="englishTranslation">English Translation *</label>
             <input
