@@ -107,6 +107,11 @@ export default function PronunciationPractice({ content, kidName, onBack }) {
                 <div className="telugu-text-practice">
                   {currentItem.teluguText}
                 </div>
+                {currentItem.transliteration && (
+                  <div className="transliteration-practice">
+                    {currentItem.transliteration}
+                  </div>
+                )}
                 <div className="english-text-practice">
                   {currentItem.englishTranslation}
                 </div>

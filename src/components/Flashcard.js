@@ -83,6 +83,9 @@ export default function Flashcard({ content, kidName, onBack }) {
           <div className="flashcard-front">
             <div className="card-content">
               <div className="telugu-word">{currentCard.teluguText}</div>
+              {currentCard.transliteration && (
+                <div className="transliteration">{currentCard.transliteration}</div>
+              )}
               {currentCard.audioUrl && (
                 <button
                   onClick={(e) => {
@@ -105,6 +108,9 @@ export default function Flashcard({ content, kidName, onBack }) {
           <div className="flashcard-back">
             <div className="card-content">
               <div className="english-word">{currentCard.englishTranslation}</div>
+              {currentCard.transliteration && (
+                <div className="transliteration-small">{currentCard.transliteration}</div>
+              )}
               <div className="telugu-word-small">{currentCard.teluguText}</div>
               {currentCard.audioUrl && (
                 <button

@@ -120,6 +120,14 @@
   font-size: 64px;
   color: #1F2937;
   font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.transliteration-practice {
+  font-size: 28px;
+  color: #9CA3AF;
+  font-style: italic;
+  font-weight: 400;
   margin-bottom: 16px;
 }
 
