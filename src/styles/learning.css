@@ -13,14 +13,14 @@
 }
 
 .learning-header h2 {
-  color: #1F2937;
+  color: var(--color-text-primary);
   font-size: 32px;
   margin-bottom: 8px;
   font-weight: 700;
 }
 
 .learning-subtitle {
-  color: #6B7280;
+  color: var(--color-text-secondary);
   font-size: 16px;
 }
 
@@ -29,9 +29,9 @@
   left: 0;
   top: 0;
   padding: 10px 20px;
-  background: white;
-  color: #6B7280;
-  border: 1px solid #D1D5DB;
+  background: var(--color-white);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   cursor: pointer;
   font-weight: 500;
@@ -40,9 +40,9 @@
 }
 
 .back-btn:hover {
-  background: #F9FAFB;
-  border-color: #9CA3AF;
-  color: #374151;
+  background: var(--color-gray-50);
+  border-color: var(--color-border);
+  color: var(--color-text-primary);
 }
 
 /* Kids Grid */
@@ -54,25 +54,25 @@
 }
 
 .kid-card-learn {
-  background: white;
-  border: 1px solid #E5E7EB;
+  background: var(--color-white);
+  border: 1px solid var(--color-border-light);
   border-radius: 12px;
   padding: 32px 24px;
   text-align: center;
   cursor: pointer;
   transition: all 200ms ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
 }
 
 .kid-card-learn:hover {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-color: #14BF96;
+  border-color: var(--color-primary);
 }
 
 .kid-avatar {
   width: 80px;
   height: 80px;
-  background: #14BF96;
+  background: var(--color-primary);
   color: white;
   font-size: 32px;
   font-weight: 600;
@@ -84,14 +84,14 @@
 }
 
 .kid-card-learn h3 {
-  color: #1F2937;
+  color: var(--color-text-primary);
   font-size: 20px;
   margin-bottom: 8px;
   font-weight: 600;
 }
 
 .kid-age {
-  color: #6B7280;
+  color: var(--color-text-secondary);
   font-size: 14px;
   font-weight: 400;
 }
@@ -105,19 +105,19 @@
 }
 
 .mode-card {
-  background: white;
-  border: 1px solid #E5E7EB;
+  background: var(--color-white);
+  border: 1px solid var(--color-border-light);
   border-radius: 12px;
   padding: 40px 32px;
   text-align: center;
   cursor: pointer;
   transition: all 200ms ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
 }
 
 .mode-card:hover {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-color: #14BF96;
+  border-color: var(--color-primary);
 }
 
 .mode-icon {
@@ -126,14 +126,14 @@
 }
 
 .mode-card h3 {
-  color: #1F2937;
+  color: var(--color-text-primary);
   font-size: 20px;
   margin-bottom: 12px;
   font-weight: 600;
 }
 
 .mode-card p {
-  color: #6B7280;
+  color: var(--color-text-secondary);
   font-size: 15px;
   margin-bottom: 16px;
   line-height: 1.5;
@@ -154,21 +154,21 @@
 .empty-state {
   text-align: center;
   padding: 64px 32px;
-  background: white;
-  border: 1px dashed #D1D5DB;
+  background: var(--color-white);
+  border: 1px dashed var(--color-border);
   border-radius: 12px;
   margin-top: 32px;
 }
 
 .empty-state h3 {
-  color: #1F2937;
+  color: var(--color-text-primary);
   font-size: 24px;
   margin-bottom: 16px;
   font-weight: 600;
 }
 
 .empty-state p {
-  color: #6B7280;
+  color: var(--color-text-secondary);
   font-size: 16px;
   line-height: 1.6;
 }
@@ -178,7 +178,7 @@
   text-align: center;
   padding: 48px;
   font-size: 16px;
-  color: #6B7280;
+  color: var(--color-text-secondary);
 }
 
 /* Error Message */

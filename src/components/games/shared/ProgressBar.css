@@ -1,0 +1,29 @@
+/* Progress Bar for Games */
+
+.progress-bar-game {
+  margin-bottom: 32px;
+}
+
+.progress-numbers {
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.progress-track {
+  width: 100%;
+  height: 12px;
+  background: var(--color-gray-50);
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--color-border-light);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  transition: width 400ms ease;
+  border-radius: 6px;
+}

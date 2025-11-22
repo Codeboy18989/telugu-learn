@@ -5,13 +5,14 @@ import { db } from '../config/firebase';
 import { getContent } from '../services/contentService';
 import Flashcard from './Flashcard';
 import PronunciationPractice from './PronunciationPractice';
+import ReadingGames from './ReadingGames';
 import '../styles/learning.css';
 
 export default function Learning() {
   const { currentUser, isSuperAdmin } = useAuth();
   const [kids, setKids] = useState([]);
   const [selectedKid, setSelectedKid] = useState(null);
-  const [learningMode, setLearningMode] = useState(null); // 'flashcards' or 'pronunciation'
+  const [learningMode, setLearningMode] = useState(null); // 'flashcards', 'pronunciation', or 'games'
   const [content, setContent] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -142,38 +143,41 @@ export default function Learning() {
 
         {error && <div className="error-message">{error}</div>}
 
-        {content.length === 0 && !loading ? (
-          <div className="empty-state">
-            <h3>No Content Available</h3>
-            <p>
-              No Telugu content found for age group {selectedKid.ageGroup}.
-              {isSuperAdmin && ' Use the seed button in Content Library to add pre-loaded content.'}
-              {!isSuperAdmin && ' Add custom content in the Content Library tab!'}
-            </p>
+        <div className="mode-selection">
+          <div
+            className="mode-card"
+            onClick={() => setLearningMode('games')}
+          >
+            <div className="mode-icon">🎮</div>
+            <h3>Game-Based Learning</h3>
+            <p>Fun games to learn reading & speaking</p>
+            <span className="content-count">NEW!</span>
           </div>
-        ) : (
-          <div className="mode-selection">
-            <div
-              className="mode-card"
-              onClick={() => setLearningMode('flashcards')}
-            >
-              <div className="mode-icon">🎴</div>
-              <h3>Flashcards</h3>
-              <p>Learn Telugu words with flashcards</p>
-              <span className="content-count">{content.length} cards</span>
-            </div>
 
-            <div
-              className="mode-card"
-              onClick={() => setLearningMode('pronunciation')}
-            >
-              <div className="mode-icon">🎤</div>
-              <h3>Pronunciation Practice</h3>
-              <p>Listen and practice pronunciation</p>
-              <span className="content-count">{content.filter(c => c.audioUrl).length} items with audio</span>
-            </div>
-          </div>
-        )}
+          {content.length > 0 && (
+            <>
+              <div
+                className="mode-card"
+                onClick={() => setLearningMode('flashcards')}
+              >
+                <div className="mode-icon">🎴</div>
+                <h3>Flashcards</h3>
+                <p>Learn Telugu words with flashcards</p>
+                <span className="content-count">{content.length} cards</span>
+              </div>
+
+              <div
+                className="mode-card"
+                onClick={() => setLearningMode('pronunciation')}
+              >
+                <div className="mode-icon">🎤</div>
+                <h3>Pronunciation Practice</h3>
+                <p>Listen and practice pronunciation</p>
+                <span className="content-count">{content.filter(c => c.audioUrl).length} items with audio</span>
+              </div>
+            </>
+          )}
+        </div>
       </div>
     );
   }
@@ -181,6 +185,13 @@ export default function Learning() {
   // Render Learning Mode
   return (
     <div className="learning-container">
+      {learningMode === 'games' && (
+        <ReadingGames
+          selectedKid={selectedKid}
+          onBack={handleBackToModes}
+        />
+      )}
+
       {learningMode === 'flashcards' && (
         <Flashcard
           content={content}

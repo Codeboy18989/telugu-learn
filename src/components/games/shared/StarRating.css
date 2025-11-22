@@ -1,0 +1,54 @@
+/* Star Rating Component */
+
+.star-rating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.star {
+  display: inline-block;
+  transition: transform 200ms ease;
+}
+
+.star-filled {
+  animation: starPop 400ms ease;
+}
+
+.star-empty {
+  opacity: 0.3;
+}
+
+/* Size variants */
+.star-small .star {
+  font-size: 20px;
+}
+
+.star-medium .star {
+  font-size: 32px;
+}
+
+.star-large .star {
+  font-size: 48px;
+}
+
+.star-count {
+  margin-left: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+/* Animation */
+@keyframes starPop {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
