@@ -12,14 +12,14 @@
 }
 
 .content-header h2 {
-  color: #1F2937;
+  color: var(--color-text-primary);
   font-size: 24px;
   margin-bottom: 8px;
   font-weight: 700;
 }
 
 .content-subtitle {
-  color: #6B7280;
+  color: var(--color-text-secondary);
   font-size: 15px;
   margin-bottom: 16px;
 }
@@ -27,7 +27,7 @@
 .seed-btn {
   margin-top: 16px;
   padding: 10px 24px;
-  background: #14BF96;
+  background: var(--color-primary);
   color: white;
   border: none;
   border-radius: 8px;
@@ -38,7 +38,7 @@
 }
 
 .seed-btn:hover:not(:disabled) {
-  background: #0FA881;
+  background: var(--color-primary-hover);
 }
 
 .seed-btn:disabled {
@@ -48,16 +48,16 @@
 
 /* Form Styling */
 .content-form {
-  background: white;
-  border: 1px solid #E5E7EB;
+  background: var(--color-white);
+  border: 1px solid var(--color-border-light);
   border-radius: 12px;
   padding: 32px;
   margin-bottom: 48px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
 }
 
 .content-form h3 {
-  color: #1F2937;
+  color: var(--color-text-primary);
   margin-bottom: 24px;
   font-size: 20px;
   font-weight: 600;
@@ -76,7 +76,7 @@
 }
 
 .form-group label {
-  color: #1F2937;
+  color: var(--color-text-primary);
   font-weight: 500;
   margin-bottom: 8px;
   font-size: 14px;
@@ -85,17 +85,17 @@
 .form-group input,
 .form-group select {
   padding: 12px;
-  border: 1px solid #D1D5DB;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   font-size: 15px;
   transition: all 200ms ease;
-  background: white;
+  background: var(--color-white);
 }
 
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
-  border-color: #14BF96;
+  border-color: var(--color-primary);
   box-shadow: 0 0 0 3px rgba(20, 191, 150, 0.1);
 }
 
@@ -119,7 +119,7 @@
 
 .file-upload-btn {
   padding: 10px 24px;
-  background: #14BF96;
+  background: var(--color-primary);
   color: white;
   border-radius: 8px;
   cursor: pointer;
@@ -130,14 +130,14 @@
 }
 
 .file-upload-btn:hover {
-  background: #0FA881;
+  background: var(--color-primary-hover);
 }
 
 .record-btn {
   padding: 10px 24px;
-  background: white;
-  color: #6B7280;
-  border: 1px solid #D1D5DB;
+  background: var(--color-white);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   cursor: pointer;
   transition: all 200ms ease;
@@ -146,8 +146,8 @@
 }
 
 .record-btn:hover {
-  background: #F9FAFB;
-  border-color: #9CA3AF;
+  background: var(--color-gray-50);
+  border-color: var(--color-border);
 }
 
 .record-btn.recording {
@@ -167,7 +167,7 @@
 }
 
 .file-name {
-  color: #14BF96;
+  color: var(--color-primary);
   font-weight: 500;
   font-size: 14px;
 }
@@ -179,18 +179,18 @@
   font-size: 18px;
   padding: 4px;
   transition: transform 200ms ease;
-  color: #6B7280;
+  color: var(--color-text-secondary);
 }
 
 .play-preview-btn:hover {
   transform: scale(1.2);
-  color: #14BF96;
+  color: var(--color-primary);
 }
 
 .submit-btn {
   width: 100%;
   padding: 14px;
-  background: #14BF96;
+  background: var(--color-primary);
   color: white;
   border: none;
   border-radius: 8px;
@@ -201,7 +201,7 @@
 }
 
 .submit-btn:hover:not(:disabled) {
-  background: #0FA881;
+  background: var(--color-primary-hover);
 }
 
 .submit-btn:disabled {
@@ -224,7 +224,7 @@
 }
 
 .content-list-header h3 {
-  color: #1F2937;
+  color: var(--color-text-primary);
   font-size: 20px;
   font-weight: 600;
 }
@@ -236,24 +236,24 @@
 }
 
 .filter-group label {
-  color: #1F2937;
+  color: var(--color-text-primary);
   font-weight: 500;
   font-size: 14px;
 }
 
 .filter-group select {
   padding: 8px 16px;
-  border: 1px solid #D1D5DB;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   font-size: 14px;
   cursor: pointer;
-  background: white;
+  background: var(--color-white);
   transition: all 200ms ease;
 }
 
 .filter-group select:focus {
   outline: none;
-  border-color: #14BF96;
+  border-color: var(--color-primary);
   box-shadow: 0 0 0 3px rgba(20, 191, 150, 0.1);
 }
 
@@ -265,18 +265,18 @@
 }
 
 .content-card {
-  background: white;
-  border: 1px solid #E5E7EB;
+  background: var(--color-white);
+  border: 1px solid var(--color-border-light);
   border-radius: 12px;
   padding: 24px;
   position: relative;
   transition: all 200ms ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
 }
 
 .content-card:hover {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-color: #14BF96;
+  border-color: var(--color-primary);
 }
 
 .preloaded-badge {
@@ -300,7 +300,7 @@
 
 .telugu-text {
   font-size: 28px;
-  color: #1F2937;
+  color: var(--color-text-primary);
   font-weight: 700;
   margin-bottom: 8px;
   line-height: 1.3;
@@ -308,7 +308,7 @@
 
 .english-text {
   font-size: 16px;
-  color: #6B7280;
+  color: var(--color-text-secondary);
   font-style: italic;
 }
 
@@ -363,9 +363,9 @@
 }
 
 .play-btn:hover {
-  background: #14BF96;
+  background: var(--color-primary);
   color: white;
-  border-color: #14BF96;
+  border-color: var(--color-primary);
 }
 
 .delete-btn {
@@ -404,7 +404,7 @@
 .loading,
 .empty-state {
   text-align: center;
-  color: #6B7280;
+  color: var(--color-text-secondary);
   padding: 48px;
   font-size: 16px;
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 import KidManagement from '../components/KidManagement';
 import ContentManagement from '../components/ContentManagement';
 import Learning from '../components/Learning';
@@ -8,6 +9,7 @@ import '../styles/dashboard.css';
 
 function Dashboard() {
   const { logout, isSuperAdmin } = useAuth();
+  const { isDarkMode, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('kids');
 
@@ -25,7 +27,12 @@ function Dashboard() {
       <header className="dashboard-header">
         <div className="header-content">
           <h1>తెలుగు Learn {isSuperAdmin && <span className="admin-badge">SUPER ADMIN</span>}</h1>
-          <button onClick={handleLogout} className="logout-btn">Logout</button>
+          <div className="header-actions">
+            <button onClick={toggleTheme} className="theme-toggle-btn" title={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}>
+              {isDarkMode ? '☀️' : '🌙'}
+            </button>
+            <button onClick={handleLogout} className="logout-btn">Logout</button>
+          </div>
         </div>
       </header>
 

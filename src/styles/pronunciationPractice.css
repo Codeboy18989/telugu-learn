@@ -16,7 +16,7 @@
 }
 
 .pronunciation-header h2 {
-  color: #1F2937;
+  color: var(--color-text-primary);
   font-size: 24px;
   flex: 1;
   text-align: center;
@@ -25,11 +25,11 @@
 
 /* Practice Card */
 .practice-card {
-  background: white;
-  border: 1px solid #E5E7EB;
+  background: var(--color-white);
+  border: 1px solid var(--color-border-light);
   border-radius: 12px;
   padding: 48px 32px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
   margin: 32px 0;
   min-height: 450px;
   display: flex;
@@ -48,7 +48,7 @@
 }
 
 .play-audio-btn {
-  background: #14BF96;
+  background: var(--color-primary);
   color: white;
   border: none;
   padding: 20px 48px;
@@ -60,7 +60,7 @@
 }
 
 .play-audio-btn:hover {
-  background: #0FA881;
+  background: var(--color-primary-hover);
   transform: scale(1.02);
 }
 
@@ -69,7 +69,7 @@
 }
 
 .audio-instruction {
-  color: #6B7280;
+  color: var(--color-text-secondary);
   font-size: 14px;
   margin-top: 16px;
   font-style: italic;
@@ -85,9 +85,9 @@
 }
 
 .reveal-btn {
-  background: white;
-  color: #6B7280;
-  border: 1px solid #D1D5DB;
+  background: var(--color-white);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
   padding: 12px 32px;
   border-radius: 8px;
   cursor: pointer;
@@ -97,8 +97,8 @@
 }
 
 .reveal-btn:hover {
-  background: #F9FAFB;
-  border-color: #9CA3AF;
+  background: var(--color-gray-50);
+  border-color: var(--color-border);
 }
 
 .answer-display {
@@ -118,14 +118,14 @@
 
 .telugu-text-practice {
   font-size: 64px;
-  color: #1F2937;
+  color: var(--color-text-primary);
   font-weight: 700;
   margin-bottom: 12px;
 }
 
 .transliteration-practice {
   font-size: 28px;
-  color: #9CA3AF;
+  color: var(--color-text-muted);
   font-style: italic;
   font-weight: 400;
   margin-bottom: 16px;
@@ -133,7 +133,7 @@
 
 .english-text-practice {
   font-size: 40px;
-  color: #6B7280;
+  color: var(--color-text-secondary);
   font-weight: 600;
   margin-bottom: 24px;
 }
@@ -157,7 +157,7 @@
 }
 
 .feedback-instruction {
-  color: #1F2937;
+  color: var(--color-text-primary);
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 24px;
@@ -182,23 +182,23 @@
 }
 
 .correct-btn {
-  background: #14BF96;
+  background: var(--color-primary);
   color: white;
 }
 
 .correct-btn:hover {
-  background: #0FA881;
+  background: var(--color-primary-hover);
 }
 
 .replay-btn {
-  background: white;
-  color: #6B7280;
-  border: 1px solid #D1D5DB;
+  background: var(--color-white);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
 }
 
 .replay-btn:hover {
-  background: #F9FAFB;
-  border-color: #9CA3AF;
+  background: var(--color-gray-50);
+  border-color: var(--color-border);
 }
 
 .success-indicator {
@@ -243,13 +243,13 @@
 
 /* Completion Message */
 .completion-message {
-  background: white;
-  border: 1px solid #E5E7EB;
+  background: var(--color-white);
+  border: 1px solid var(--color-border-light);
   padding: 32px;
   border-radius: 12px;
   text-align: center;
   margin-top: 32px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
   animation: slideUp 600ms ease;
 }
 
@@ -267,12 +267,12 @@
 .completion-message h3 {
   font-size: 24px;
   margin-bottom: 8px;
-  color: #1F2937;
+  color: var(--color-text-primary);
 }
 
 .completion-message p {
   font-size: 16px;
-  color: #6B7280;
+  color: var(--color-text-secondary);
 }
 
 /* Responsive Design */
