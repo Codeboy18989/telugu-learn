@@ -33,6 +33,9 @@ function Dashboard() {
             <button onClick={toggleTheme} className="theme-toggle-btn" title={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}>
               {isDarkMode ? '☀️' : '🌙'}
             </button>
+            <button onClick={() => navigate('/settings')} className="settings-btn" title="Settings">
+              ⚙️
+            </button>
             <button onClick={handleLogout} className="logout-btn">Logout</button>
           </div>
         </div>

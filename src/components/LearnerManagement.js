@@ -8,6 +8,7 @@ import {
   deleteLearner,
   autoMigrateIfNeeded
 } from '../services/learnerService';
+import InviteFriends from './InviteFriends';
 import '../styles/kidManagement.css';
 
 const AGE_GROUPS = [
@@ -19,13 +20,14 @@ const AGE_GROUPS = [
 function LearnerManagement() {
   const { currentUser } = useAuth();
   const labels = useModeLabels();
-  const { mode } = useUserMode();
+  const { mode, isFriends } = useUserMode();
   const [learners, setLearners] = useState([]);
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState('');
   const [ageGroup, setAgeGroup] = useState('2-4');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [showInviteModal, setShowInviteModal] = useState(false);
 
   // Load learners from Firestore
   useEffect(() => {
@@ -111,46 +113,73 @@ function LearnerManagement() {
 
   return (
     <div className="kid-management">
+      {/* Invite Friends Modal */}
+      {showInviteModal && (
+        <InviteFriends
+          onClose={() => {
+            setShowInviteModal(false);
+            loadLearners(); // Reload in case friends were added
+          }}
+        />
+      )}
+
       <div className="kid-management-content">
         {/* Add Learner Form Section */}
         <div className="add-kid-section">
           <h2>{labels.addLearnerTitle}</h2>
-          <form onSubmit={handleAddLearner} className="add-kid-form">
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="learner-name">{labels.learner}'s Name:</label>
-                <input
-                  id="learner-name"
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Enter name"
-                  maxLength="50"
-                />
-              </div>
 
-              <div className="form-group">
-                <label htmlFor="age-group">Age Group:</label>
-                <select
-                  id="age-group"
-                  value={ageGroup}
-                  onChange={(e) => setAgeGroup(e.target.value)}
-                >
-                  {AGE_GROUPS.map((group) => (
-                    <option key={group.value} value={group.value}>
-                      {group.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="form-group-button">
-                <button type="submit" className="add-btn">
-                  {labels.addLearner}
-                </button>
-              </div>
+          {isFriends ? (
+            /* Friends Mode: Show Invite Button */
+            <div className="invite-mode-section">
+              <p className="invite-description">
+                Invite friends via email to learn Telugu together. They'll receive an invitation to join your learning group!
+              </p>
+              <button
+                onClick={() => setShowInviteModal(true)}
+                className="add-btn invite-btn"
+              >
+                {labels.addLearner}
+              </button>
             </div>
-          </form>
+          ) : (
+            /* Family/Teacher Mode: Show Regular Form */
+            <form onSubmit={handleAddLearner} className="add-kid-form">
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="learner-name">{labels.learner}'s Name:</label>
+                  <input
+                    id="learner-name"
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Enter name"
+                    maxLength="50"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="age-group">Age Group:</label>
+                  <select
+                    id="age-group"
+                    value={ageGroup}
+                    onChange={(e) => setAgeGroup(e.target.value)}
+                  >
+                    {AGE_GROUPS.map((group) => (
+                      <option key={group.value} value={group.value}>
+                        {group.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="form-group-button">
+                  <button type="submit" className="add-btn">
+                    {labels.addLearner}
+                  </button>
+                </div>
+              </div>
+            </form>
+          )}
 
           {/* Messages */}
           {error && <div className="message error-message">{error}</div>}
