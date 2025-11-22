@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { collection, getDocs, query, orderBy } from 'firebase/firestore';
-import { db } from '../config/firebase';
+import { useModeLabels } from '../hooks/useModeLabels';
+import { getLearners } from '../services/learnerService';
 import { getContent } from '../services/contentService';
 import Flashcard from './Flashcard';
 import PronunciationPractice from './PronunciationPractice';
@@ -10,60 +10,53 @@ import '../styles/learning.css';
 
 export default function Learning() {
   const { currentUser, isSuperAdmin } = useAuth();
-  const [kids, setKids] = useState([]);
-  const [selectedKid, setSelectedKid] = useState(null);
+  const labels = useModeLabels();
+  const [learners, setLearners] = useState([]);
+  const [selectedLearner, setSelectedLearner] = useState(null);
   const [learningMode, setLearningMode] = useState(null); // 'flashcards', 'pronunciation', or 'games'
   const [content, setContent] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // Load kids
+  // Load learners
   useEffect(() => {
-    loadKids();
+    loadLearners();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser]);
 
-  // Load content when kid is selected
+  // Load content when learner is selected
   useEffect(() => {
-    if (selectedKid) {
-      loadContentForKid();
+    if (selectedLearner) {
+      loadContentForLearner();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedKid]);
+  }, [selectedLearner]);
 
-  async function loadKids() {
+  async function loadLearners() {
     try {
       setLoading(true);
-      const kidsRef = collection(db, 'parents', currentUser.uid, 'kids');
-      const q = query(kidsRef, orderBy('createdAt', 'desc'));
-      const snapshot = await getDocs(q);
-
-      const kidsList = [];
-      snapshot.forEach(doc => {
-        kidsList.push({ id: doc.id, ...doc.data() });
-      });
-
-      setKids(kidsList);
+      const learnersList = await getLearners(currentUser.uid);
+      setLearners(learnersList);
       setError('');
     } catch (err) {
-      setError('Failed to load kids: ' + err.message);
+      setError(`Failed to load ${labels.learnerPlural.toLowerCase()}: ` + err.message);
       console.error(err);
     } finally {
       setLoading(false);
     }
   }
 
-  async function loadContentForKid() {
+  async function loadContentForLearner() {
     try {
       setLoading(true);
       const contentList = await getContent(
         currentUser.uid,
-        selectedKid.ageGroup,
+        selectedLearner.ageGroup,
         isSuperAdmin
       );
 
       if (contentList.length === 0) {
-        setError(`No content available for age group ${selectedKid.ageGroup}. Add some content in the Content Library!`);
+        setError(`No content available for age group ${selectedLearner.ageGroup}. Add some content in the Content Library!`);
       } else {
         setContent(contentList);
         setError('');
@@ -76,13 +69,13 @@ export default function Learning() {
     }
   }
 
-  function handleKidSelect(kid) {
-    setSelectedKid(kid);
-    setLearningMode(null); // Reset mode when selecting new kid
+  function handleLearnerSelect(learner) {
+    setSelectedLearner(learner);
+    setLearningMode(null); // Reset mode when selecting new learner
   }
 
-  function handleBackToKids() {
-    setSelectedKid(null);
+  function handleBackToLearners() {
+    setSelectedLearner(null);
     setLearningMode(null);
     setContent([]);
     setError('');
@@ -92,35 +85,35 @@ export default function Learning() {
     setLearningMode(null);
   }
 
-  // Render Kid Selection
-  if (!selectedKid) {
+  // Render Learner Selection
+  if (!selectedLearner) {
     return (
       <div className="learning-container">
         <div className="learning-header">
           <h2>🎓 Let's Learn Telugu!</h2>
-          <p className="learning-subtitle">Select a child to start learning</p>
+          <p className="learning-subtitle">{labels.selectLearner}</p>
         </div>
 
         {loading ? (
           <p className="loading">Loading...</p>
-        ) : kids.length === 0 ? (
+        ) : learners.length === 0 ? (
           <div className="empty-state">
-            <h3>No Kids Added Yet</h3>
-            <p>Add your children in the "My Kids" tab to get started!</p>
+            <h3>{labels.noLearnersYet}</h3>
+            <p>Add {labels.learnerPlural.toLowerCase()} in the "{labels.tab1}" tab to get started!</p>
           </div>
         ) : (
           <div className="kids-grid">
-            {kids.map(kid => (
+            {learners.map(learner => (
               <div
-                key={kid.id}
+                key={learner.id}
                 className="kid-card-learn"
-                onClick={() => handleKidSelect(kid)}
+                onClick={() => handleLearnerSelect(learner)}
               >
                 <div className="kid-avatar">
-                  {kid.name.charAt(0).toUpperCase()}
+                  {learner.name.charAt(0).toUpperCase()}
                 </div>
-                <h3>{kid.name}</h3>
-                <p className="kid-age">Age: {kid.ageGroup} years</p>
+                <h3>{learner.name}</h3>
+                <p className="kid-age">Age: {learner.ageGroup} years</p>
               </div>
             ))}
           </div>
@@ -134,10 +127,10 @@ export default function Learning() {
     return (
       <div className="learning-container">
         <div className="learning-header">
-          <button onClick={handleBackToKids} className="back-btn">
-            ← Back to Kids
+          <button onClick={handleBackToLearners} className="back-btn">
+            ← Back to {labels.learnerPlural}
           </button>
-          <h2>🎓 Learning with {selectedKid.name}</h2>
+          <h2>🎓 {labels.learningWith} {selectedLearner.name}</h2>
           <p className="learning-subtitle">Choose a learning mode</p>
         </div>
 
@@ -187,7 +180,7 @@ export default function Learning() {
     <div className="learning-container">
       {learningMode === 'games' && (
         <ReadingGames
-          selectedKid={selectedKid}
+          selectedKid={selectedLearner}
           onBack={handleBackToModes}
         />
       )}
@@ -195,7 +188,7 @@ export default function Learning() {
       {learningMode === 'flashcards' && (
         <Flashcard
           content={content}
-          kidName={selectedKid.name}
+          kidName={selectedLearner.name}
           onBack={handleBackToModes}
         />
       )}
@@ -203,7 +196,7 @@ export default function Learning() {
       {learningMode === 'pronunciation' && (
         <PronunciationPractice
           content={content.filter(c => c.audioUrl)} // Only items with audio
-          kidName={selectedKid.name}
+          kidName={selectedLearner.name}
           onBack={handleBackToModes}
         />
       )}

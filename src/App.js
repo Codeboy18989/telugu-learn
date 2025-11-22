@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
+import { UserModeProvider } from './context/UserModeContext';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
@@ -55,7 +56,9 @@ function App() {
     <ThemeProvider>
       <Router>
         <AuthProvider>
-          <AppRoutes />
+          <UserModeProvider>
+            <AppRoutes />
+          </UserModeProvider>
         </AuthProvider>
       </Router>
     </ThemeProvider>

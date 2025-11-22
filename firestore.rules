@@ -2,7 +2,42 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Parent users collection
+    // NEW STRUCTURE: Users collection (multi-user system)
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+
+      // User profile with mode settings
+      match /profile/{docId} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+
+      // Learners subcollection (replaces kids)
+      match /learners/{learnerId} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+
+        // Game progress subcollection
+        match /gameProgress/{progressId} {
+          allow read, write: if request.auth != null && request.auth.uid == userId;
+        }
+
+        // Stats subcollection (for streaks, achievements, etc.)
+        match /stats/{statId} {
+          allow read, write: if request.auth != null && request.auth.uid == userId;
+        }
+
+        // Progress subcollection (for learning content)
+        match /progress/{progressId} {
+          allow read, write: if request.auth != null && request.auth.uid == userId;
+        }
+      }
+
+      // Invites subcollection (for friends mode)
+      match /invites/{inviteId} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+
+    // OLD STRUCTURE: Keep for backward compatibility (will be deprecated)
     match /parents/{userId} {
       allow read, write: if request.auth != null && request.auth.uid == userId;
 
