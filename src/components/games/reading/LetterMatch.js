@@ -36,6 +36,7 @@ function LetterMatch() {
   // Initialize game on mount
   useEffect(() => {
     initializeGame();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Update current question when game session changes

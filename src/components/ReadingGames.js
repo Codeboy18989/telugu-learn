@@ -16,6 +16,7 @@ function ReadingGames({ selectedKid, onBack }) {
 
   useEffect(() => {
     loadProgress();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedKid]);
 
   async function loadProgress() {
