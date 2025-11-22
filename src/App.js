@@ -6,6 +6,7 @@ import { UserModeProvider } from './context/UserModeContext';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
+import Settings from './pages/Settings';
 import LetterMatch from './components/games/reading/LetterMatch';
 import './styles/theme.css';
 import './styles/auth.css';
@@ -35,6 +36,14 @@ function AppRoutes() {
         element={
           <PrivateRoute>
             <Dashboard />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/settings"
+        element={
+          <PrivateRoute>
+            <Settings />
           </PrivateRoute>
         }
       />

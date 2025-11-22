@@ -30,6 +30,41 @@
   border: 1px solid var(--color-border-light);
 }
 
+/* Invite Mode Section (Friends Mode) */
+.invite-mode-section {
+  background: var(--color-white);
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border-light);
+  text-align: center;
+}
+
+.invite-description {
+  color: var(--color-text-secondary);
+  margin-bottom: 24px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.invite-btn {
+  background: var(--color-primary);
+  color: white;
+  padding: 12px 32px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 200ms ease;
+  font-size: 16px;
+}
+
+.invite-btn:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr auto;
