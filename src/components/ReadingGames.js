@@ -22,22 +22,45 @@ function ReadingGames({ selectedKid, onBack }) {
   async function loadProgress() {
     try {
       setLoading(true);
-      const progressRef = collection(
+
+      // Try new path first (users/learners)
+      let progressRef = collection(
         db,
-        'parents',
+        'users',
         currentUser.uid,
-        'kids',
+        'learners',
         selectedKid.id,
         'gameProgress'
       );
 
-      const q = query(
+      let q = query(
         progressRef,
         where('track', '==', 'reading'),
         where('level', '==', 1)
       );
 
-      const snapshot = await getDocs(q);
+      let snapshot = await getDocs(q);
+
+      // Fallback to old path if new path has no data
+      if (snapshot.empty) {
+        progressRef = collection(
+          db,
+          'parents',
+          currentUser.uid,
+          'kids',
+          selectedKid.id,
+          'gameProgress'
+        );
+
+        q = query(
+          progressRef,
+          where('track', '==', 'reading'),
+          where('level', '==', 1)
+        );
+
+        snapshot = await getDocs(q);
+      }
+
       const progressData = snapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data()

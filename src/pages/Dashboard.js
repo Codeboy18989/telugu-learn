@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
-import KidManagement from '../components/KidManagement';
+import { useModeLabels } from '../hooks/useModeLabels';
+import LearnerManagement from '../components/LearnerManagement';
 import ContentManagement from '../components/ContentManagement';
 import Learning from '../components/Learning';
 import '../styles/dashboard.css';
@@ -10,8 +11,9 @@ import '../styles/dashboard.css';
 function Dashboard() {
   const { logout, isSuperAdmin } = useAuth();
   const { isDarkMode, toggleTheme } = useTheme();
+  const labels = useModeLabels();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState('kids');
+  const [activeTab, setActiveTab] = useState('learners');
 
   async function handleLogout() {
     try {
@@ -26,7 +28,7 @@ function Dashboard() {
     <div className="dashboard">
       <header className="dashboard-header">
         <div className="header-content">
-          <h1>తెలుగు Learn {isSuperAdmin && <span className="admin-badge">SUPER ADMIN</span>}</h1>
+          <h1>{labels.dashboardTitle} {isSuperAdmin && <span className="admin-badge">SUPER ADMIN</span>}</h1>
           <div className="header-actions">
             <button onClick={toggleTheme} className="theme-toggle-btn" title={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}>
               {isDarkMode ? '☀️' : '🌙'}
@@ -39,27 +41,27 @@ function Dashboard() {
       {/* Navigation Tabs */}
       <nav className="dashboard-nav">
         <button
-          className={`nav-tab ${activeTab === 'kids' ? 'active' : ''}`}
-          onClick={() => setActiveTab('kids')}
+          className={`nav-tab ${activeTab === 'learners' ? 'active' : ''}`}
+          onClick={() => setActiveTab('learners')}
         >
-          👶 My Kids
+          {labels.tab1}
         </button>
         <button
           className={`nav-tab ${activeTab === 'content' ? 'active' : ''}`}
           onClick={() => setActiveTab('content')}
         >
-          📚 Content Library
+          {labels.tab2}
         </button>
         <button
           className={`nav-tab ${activeTab === 'learn' ? 'active' : ''}`}
           onClick={() => setActiveTab('learn')}
         >
-          🎓 Learn
+          {labels.tab3}
         </button>
       </nav>
 
       <main>
-        {activeTab === 'kids' && <KidManagement />}
+        {activeTab === 'learners' && <LearnerManagement />}
         {activeTab === 'content' && <ContentManagement />}
         {activeTab === 'learn' && <Learning />}
       </main>

@@ -145,21 +145,29 @@ export function completeGameSession(gameSession, starsConfig) {
 }
 
 /**
- * Save game progress to Firestore
+ * Save game progress to Firestore (supports both old and new paths)
  * @param {string} parentId - Parent's user ID
- * @param {string} kidId - Kid's ID
+ * @param {string} kidId - Kid's ID (or learnerId)
  * @param {Object} gameSession - Completed game session
  */
 export async function saveGameProgress(parentId, kidId, gameSession) {
   try {
     const { track, level, lesson, results } = gameSession;
-
-    // Create unique progress document ID
     const progressId = `${track}_L${level}_lesson${lesson}`;
-    const progressRef = doc(db, 'parents', parentId, 'kids', kidId, 'gameProgress', progressId);
 
-    // Check if progress already exists
-    const existingProgress = await getDoc(progressRef);
+    // Try new path first
+    let progressRef = doc(db, 'users', parentId, 'learners', kidId, 'gameProgress', progressId);
+    let existingProgress = await getDoc(progressRef);
+
+    // Check if learner exists in new structure
+    const learnerRef = doc(db, 'users', parentId, 'learners', kidId);
+    const learnerDoc = await getDoc(learnerRef);
+
+    // If learner doesn't exist in new structure, use old path
+    if (!learnerDoc.exists()) {
+      progressRef = doc(db, 'parents', parentId, 'kids', kidId, 'gameProgress', progressId);
+      existingProgress = await getDoc(progressRef);
+    }
 
     if (existingProgress.exists()) {
       // Update existing progress (keep best score)
@@ -205,15 +213,22 @@ export async function saveGameProgress(parentId, kidId, gameSession) {
 }
 
 /**
- * Update daily streak for a kid
+ * Update daily streak for a learner (supports both old and new paths)
  * @param {string} parentId - Parent's user ID
- * @param {string} kidId - Kid's ID
+ * @param {string} kidId - Kid's ID (or learnerId)
  */
 async function updateDailyStreak(parentId, kidId) {
   try {
-    const streakRef = doc(db, 'parents', parentId, 'kids', kidId, 'stats', 'streak');
-    const streakDoc = await getDoc(streakRef);
+    // Check if learner exists in new structure
+    const learnerRef = doc(db, 'users', parentId, 'learners', kidId);
+    const learnerDoc = await getDoc(learnerRef);
 
+    // Use new or old path based on where learner exists
+    const streakRef = learnerDoc.exists()
+      ? doc(db, 'users', parentId, 'learners', kidId, 'stats', 'streak')
+      : doc(db, 'parents', parentId, 'kids', kidId, 'stats', 'streak');
+
+    const streakDoc = await getDoc(streakRef);
     const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
 
     if (streakDoc.exists()) {
@@ -259,23 +274,36 @@ async function updateDailyStreak(parentId, kidId) {
 }
 
 /**
- * Get kid's game progress for a specific track and level
+ * Get learner's game progress for a specific track and level (supports both paths)
  * @param {string} parentId - Parent's user ID
- * @param {string} kidId - Kid's ID
+ * @param {string} kidId - Kid's ID (or learnerId)
  * @param {string} track - 'reading' or 'speaking'
  * @param {number} level - Level number
  * @returns {Array} Array of lesson progress objects
  */
 export async function getLevelProgress(parentId, kidId, track, level) {
   try {
-    const progressCollection = collection(db, 'parents', parentId, 'kids', kidId, 'gameProgress');
-    const q = query(
+    // Try new path first
+    let progressCollection = collection(db, 'users', parentId, 'learners', kidId, 'gameProgress');
+    let q = query(
       progressCollection,
       where('track', '==', track),
       where('level', '==', level)
     );
 
-    const snapshot = await getDocs(q);
+    let snapshot = await getDocs(q);
+
+    // Fallback to old path if no data
+    if (snapshot.empty) {
+      progressCollection = collection(db, 'parents', parentId, 'kids', kidId, 'gameProgress');
+      q = query(
+        progressCollection,
+        where('track', '==', track),
+        where('level', '==', level)
+      );
+      snapshot = await getDocs(q);
+    }
+
     return snapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data()
