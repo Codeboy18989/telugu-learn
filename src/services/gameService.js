@@ -1,5 +1,5 @@
 // Game Service - Manages game state and logic
-import { db } from '../firebase';
+import { db } from '../config/firebase';
 import {
   doc,
   setDoc,
