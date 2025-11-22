@@ -214,7 +214,15 @@ function LetterMatch() {
     );
   }
 
-  // Show game question
+  // Show game question (only if currentQuestion is loaded)
+  if (!currentQuestion) {
+    return (
+      <GameContainer title="Letter Match" onExit={handleExit}>
+        <div className="game-loading">Loading question...</div>
+      </GameContainer>
+    );
+  }
+
   return (
     <GameContainer title="Letter Match" onExit={handleExit}>
       <ProgressBar
