@@ -2,60 +2,279 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
-import { UserModeProvider } from './context/UserModeContext';
+import { USER_ROLES } from './services/userService';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+
+// Import app-specific components
+import ConsumerDashboard from './apps/consumer/pages/ConsumerDashboard';
+import InvitationsPage from './apps/consumer/pages/InvitationsPage';
+import AdminDashboard from './apps/admin/pages/AdminDashboard';
+import OrganizationsPage from './apps/admin/pages/OrganizationsPage';
+import CreateOrganizationPage from './apps/admin/pages/CreateOrganizationPage';
+import ActivityLogsPage from './apps/admin/pages/ActivityLogsPage';
+import AnalyticsPage from './apps/admin/pages/AnalyticsPage';
+
+// Import existing components temporarily (will be replaced with new app-specific components)
 import Dashboard from './pages/Dashboard';
 import Settings from './pages/Settings';
 import LetterMatch from './components/games/reading/LetterMatch';
+
+// TODO: Import B2B components when created
+// import BusinessDashboard from './apps/business/pages/BusinessDashboard';
+
 import './styles/theme.css';
 import './styles/auth.css';
 import './styles/dashboard.css';
 
+/**
+ * Private route that requires authentication
+ */
 function PrivateRoute({ children }) {
   const { currentUser } = useAuth();
-
   return currentUser ? children : <Navigate to="/login" />;
 }
 
+/**
+ * Role-based route that requires specific user role(s)
+ */
+function RoleRoute({ children, allowedRoles }) {
+  const { currentUser, userRole } = useAuth();
+
+  if (!currentUser) {
+    return <Navigate to="/login" />;
+  }
+
+  if (!allowedRoles.includes(userRole)) {
+    // Redirect to appropriate dashboard based on user role
+    return <Navigate to={getRoleBasedDashboard(userRole)} />;
+  }
+
+  return children;
+}
+
+/**
+ * Get the default dashboard path for a user role
+ */
+function getRoleBasedDashboard(userRole) {
+  switch (userRole) {
+    case USER_ROLES.CONSUMER:
+      return '/consumer/dashboard';
+    case USER_ROLES.TEACHER:
+    case USER_ROLES.SCHOOL_ADMIN:
+      return '/business/dashboard';
+    case USER_ROLES.SUPER_ADMIN:
+      return '/admin/dashboard';
+    default:
+      return '/login';
+  }
+}
+
 function AppRoutes() {
-  const { currentUser } = useAuth();
+  const { currentUser, userRole } = useAuth();
 
   return (
     <Routes>
+      {/* Public routes */}
       <Route
         path="/login"
-        element={currentUser ? <Navigate to="/dashboard" /> : <Login />}
+        element={
+          currentUser ? (
+            <Navigate to={getRoleBasedDashboard(userRole)} />
+          ) : (
+            <Login />
+          )
+        }
       />
       <Route
         path="/signup"
-        element={currentUser ? <Navigate to="/dashboard" /> : <Signup />}
-      />
-      <Route
-        path="/dashboard"
         element={
-          <PrivateRoute>
-            <Dashboard />
-          </PrivateRoute>
+          currentUser ? (
+            <Navigate to={getRoleBasedDashboard(userRole)} />
+          ) : (
+            <Signup />
+          )
+        }
+      />
+
+      {/* B2C Consumer App Routes */}
+      <Route
+        path="/consumer/dashboard"
+        element={
+          <RoleRoute allowedRoles={[USER_ROLES.CONSUMER]}>
+            <ConsumerDashboard />
+          </RoleRoute>
         }
       />
       <Route
-        path="/settings"
+        path="/consumer/profile"
         element={
-          <PrivateRoute>
+          <RoleRoute allowedRoles={[USER_ROLES.CONSUMER]}>
             <Settings />
-          </PrivateRoute>
+          </RoleRoute>
         }
       />
       <Route
-        path="/games/reading/letter-match/:kidId/:lesson"
+        path="/consumer/invitations"
+        element={
+          <RoleRoute allowedRoles={[USER_ROLES.CONSUMER]}>
+            <InvitationsPage />
+          </RoleRoute>
+        }
+      />
+
+      {/* B2B Business App Routes */}
+      <Route
+        path="/business/dashboard"
+        element={
+          <RoleRoute
+            allowedRoles={[USER_ROLES.TEACHER, USER_ROLES.SCHOOL_ADMIN]}
+          >
+            {/* TODO: Replace with BusinessDashboard */}
+            <Dashboard />
+          </RoleRoute>
+        }
+      />
+      <Route
+        path="/business/students"
+        element={
+          <RoleRoute
+            allowedRoles={[USER_ROLES.TEACHER, USER_ROLES.SCHOOL_ADMIN]}
+          >
+            {/* TODO: Create StudentsPage */}
+            <div>Students Management - Coming Soon</div>
+          </RoleRoute>
+        }
+      />
+      <Route
+        path="/business/reports"
+        element={
+          <RoleRoute
+            allowedRoles={[USER_ROLES.TEACHER, USER_ROLES.SCHOOL_ADMIN]}
+          >
+            {/* TODO: Create ReportsPage */}
+            <div>Reports - Coming Soon</div>
+          </RoleRoute>
+        }
+      />
+      <Route
+        path="/business/settings"
+        element={
+          <RoleRoute
+            allowedRoles={[USER_ROLES.TEACHER, USER_ROLES.SCHOOL_ADMIN]}
+          >
+            <Settings />
+          </RoleRoute>
+        }
+      />
+
+      {/* Super Admin Portal Routes */}
+      <Route
+        path="/admin/dashboard"
+        element={
+          <RoleRoute allowedRoles={[USER_ROLES.SUPER_ADMIN]}>
+            <AdminDashboard />
+          </RoleRoute>
+        }
+      />
+      <Route
+        path="/admin/organizations"
+        element={
+          <RoleRoute allowedRoles={[USER_ROLES.SUPER_ADMIN]}>
+            <OrganizationsPage />
+          </RoleRoute>
+        }
+      />
+      <Route
+        path="/admin/create-organization"
+        element={
+          <RoleRoute allowedRoles={[USER_ROLES.SUPER_ADMIN]}>
+            <CreateOrganizationPage />
+          </RoleRoute>
+        }
+      />
+      <Route
+        path="/admin/analytics"
+        element={
+          <RoleRoute allowedRoles={[USER_ROLES.SUPER_ADMIN]}>
+            <AnalyticsPage />
+          </RoleRoute>
+        }
+      />
+      <Route
+        path="/admin/activity-logs"
+        element={
+          <RoleRoute allowedRoles={[USER_ROLES.SUPER_ADMIN]}>
+            <ActivityLogsPage />
+          </RoleRoute>
+        }
+      />
+      <Route
+        path="/admin/content"
+        element={
+          <RoleRoute allowedRoles={[USER_ROLES.SUPER_ADMIN]}>
+            {/* TODO: Create ContentManagementPage */}
+            <div>Content Management - Coming Soon</div>
+          </RoleRoute>
+        }
+      />
+
+      {/* Shared game routes - accessible by all authenticated users */}
+      <Route
+        path="/games/reading/letter-match/:learnerId/:lesson"
         element={
           <PrivateRoute>
             <LetterMatch />
           </PrivateRoute>
         }
       />
-      <Route path="/" element={<Navigate to={currentUser ? "/dashboard" : "/login"} />} />
+
+      {/* Legacy routes - redirect to new structure */}
+      <Route
+        path="/dashboard"
+        element={
+          currentUser ? (
+            <Navigate to={getRoleBasedDashboard(userRole)} />
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route
+        path="/settings"
+        element={
+          currentUser ? (
+            <Navigate to={getRoleBasedDashboard(userRole)} />
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+
+      {/* Root redirect */}
+      <Route
+        path="/"
+        element={
+          currentUser ? (
+            <Navigate to={getRoleBasedDashboard(userRole)} />
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+
+      {/* 404 - Not found */}
+      <Route
+        path="*"
+        element={
+          <div style={{ padding: '2rem', textAlign: 'center' }}>
+            <h1>404 - Page Not Found</h1>
+            <p>
+              <a href="/">Go to home</a>
+            </p>
+          </div>
+        }
+      />
     </Routes>
   );
 }
@@ -65,9 +284,7 @@ function App() {
     <ThemeProvider>
       <Router>
         <AuthProvider>
-          <UserModeProvider>
-            <AppRoutes />
-          </UserModeProvider>
+          <AppRoutes />
         </AuthProvider>
       </Router>
     </ThemeProvider>
