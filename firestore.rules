@@ -2,73 +2,298 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // NEW STRUCTURE: Users collection (multi-user system)
+    // ========================================
+    // HELPER FUNCTIONS
+    // ========================================
+
+    // Check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Get user's role from users collection
+    function getUserRole() {
+      return isAuthenticated() ? get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role : null;
+    }
+
+    // Get user's organization ID
+    function getUserOrganization() {
+      return isAuthenticated() ? get(/databases/$(database)/documents/users/$(request.auth.uid)).data.organizationId : null;
+    }
+
+    // Check if user is super admin
+    function isSuperAdmin() {
+      return isAuthenticated() && getUserRole() == 'super_admin';
+    }
+
+    // Check if user is a consumer
+    function isConsumer() {
+      return isAuthenticated() && getUserRole() == 'consumer';
+    }
+
+    // Check if user is teacher or school admin
+    function isB2BUser() {
+      return isAuthenticated() && getUserRole() in ['teacher', 'school_admin'];
+    }
+
+    // Check if user belongs to specific organization
+    function belongsToOrganization(orgId) {
+      return isAuthenticated() && getUserOrganization() == orgId;
+    }
+
+    // Check if user owns the resource
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // ========================================
+    // USERS COLLECTION (Core user documents)
+    // ========================================
+
     match /users/{userId} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+      // Users can read their own document
+      allow read: if isOwner(userId);
 
-      // User profile with mode settings
-      match /profile/{docId} {
-        allow read, write: if request.auth != null && request.auth.uid == userId;
-      }
+      // Super admin can read all users
+      allow read: if isSuperAdmin();
 
-      // Learners subcollection (replaces kids)
-      match /learners/{learnerId} {
-        allow read, write: if request.auth != null && request.auth.uid == userId;
+      // Allow user creation on signup with validation
+      allow create: if isAuthenticated() &&
+                       isOwner(userId) &&
+                       request.resource.data.email == request.auth.token.email &&
+                       request.resource.data.organizationId == null &&
+                       (request.resource.data.role == 'consumer' ||
+                        request.resource.data.role == 'super_admin');
 
-        // Game progress subcollection
+      // Super admin can write any user document
+      allow write: if isSuperAdmin();
+
+      // Users can update their own document but not role or organizationId
+      allow update: if isOwner(userId) &&
+                       request.resource.data.role == resource.data.role &&
+                       request.resource.data.organizationId == resource.data.organizationId;
+    }
+
+    // ========================================
+    // B2C: CONSUMER PROFILES & CHILDREN
+    // ========================================
+
+    match /consumerProfiles/{userId} {
+      // Consumers can read/write their own profile
+      allow read, write: if isConsumer() && isOwner(userId);
+
+      // Children subcollection
+      match /children/{childId} {
+        // Owner can read/write their own children
+        allow read, write: if isConsumer() && isOwner(userId);
+
+        // Users with shared access can read
+        allow read: if isConsumer() &&
+                       exists(/databases/$(database)/documents/consumerProfiles/$(userId)/sharedAccess/$(request.auth.uid)) &&
+                       get(/databases/$(database)/documents/consumerProfiles/$(userId)/sharedAccess/$(request.auth.uid)).data.status == 'active' &&
+                       childId in get(/databases/$(database)/documents/consumerProfiles/$(userId)/sharedAccess/$(request.auth.uid)).data.childrenIds;
+
+        // Game progress for children
         match /gameProgress/{progressId} {
-          allow read, write: if request.auth != null && request.auth.uid == userId;
+          allow read, write: if isConsumer() && isOwner(userId);
+          allow read: if isConsumer() &&
+                         exists(/databases/$(database)/documents/consumerProfiles/$(userId)/sharedAccess/$(request.auth.uid)) &&
+                         get(/databases/$(database)/documents/consumerProfiles/$(userId)/sharedAccess/$(request.auth.uid)).data.status == 'active';
         }
 
-        // Stats subcollection (for streaks, achievements, etc.)
+        // Stats for children
         match /stats/{statId} {
-          allow read, write: if request.auth != null && request.auth.uid == userId;
+          allow read, write: if isConsumer() && isOwner(userId);
+          allow read: if isConsumer() &&
+                         exists(/databases/$(database)/documents/consumerProfiles/$(userId)/sharedAccess/$(request.auth.uid));
         }
 
-        // Progress subcollection (for learning content)
+        // Progress for children
         match /progress/{progressId} {
-          allow read, write: if request.auth != null && request.auth.uid == userId;
+          allow read, write: if isConsumer() && isOwner(userId);
+          allow read: if isConsumer() &&
+                         exists(/databases/$(database)/documents/consumerProfiles/$(userId)/sharedAccess/$(request.auth.uid));
         }
       }
 
-      // Invites subcollection (for friends mode)
-      match /invites/{inviteId} {
-        allow read, write: if request.auth != null && request.auth.uid == userId;
+      // Shared access management
+      match /sharedAccess/{partnerId} {
+        // Owner can manage who has access to their children
+        allow read, write: if isConsumer() && isOwner(userId);
+      }
+
+      // Access to children granted by others
+      match /accessToChildren/{ownerId} {
+        // User can read their own access grants
+        allow read, write: if isConsumer() && isOwner(userId);
       }
     }
 
-    // OLD STRUCTURE: Keep for backward compatibility (will be deprecated)
-    match /parents/{userId} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+    // ========================================
+    // B2C: INVITATIONS
+    // ========================================
 
-      // Kids subcollection
-      match /kids/{kidId} {
-        allow read, write: if request.auth != null && request.auth.uid == userId;
+    match /invitations/{invitationId} {
+      // Sender can read/write/delete their sent invitations
+      allow read, write, delete: if isConsumer() &&
+                                     resource.data.fromUserId == request.auth.uid;
 
-        // Game progress subcollection
+      // Recipient can read invitations sent to their email
+      allow read: if isConsumer() &&
+                     resource.data.toEmail == request.auth.token.email &&
+                     resource.data.status == 'pending';
+
+      // Recipient can update status (accept/decline)
+      allow update: if isConsumer() &&
+                       resource.data.toEmail == request.auth.token.email &&
+                       resource.data.status == 'pending' &&
+                       request.resource.data.status in ['accepted', 'declined'];
+
+      // Anyone can create invitations if they're a consumer
+      allow create: if isConsumer() &&
+                       request.resource.data.fromUserId == request.auth.uid &&
+                       request.resource.data.status == 'pending';
+    }
+
+    // ========================================
+    // B2B: ORGANIZATIONS
+    // ========================================
+
+    match /organizations/{organizationId} {
+      // Super admin can read/write all organizations
+      allow read, write: if isSuperAdmin();
+
+      // Organization members can read their own organization
+      allow read: if isB2BUser() && belongsToOrganization(organizationId);
+
+      // Admins subcollection (teachers/school admins)
+      match /admins/{adminId} {
+        allow read: if isSuperAdmin();
+        allow read: if isB2BUser() && belongsToOrganization(organizationId);
+        allow write: if isSuperAdmin();
+      }
+
+      // Students subcollection
+      match /students/{studentId} {
+        // Organization members can read/write students in their org
+        allow read, write: if isB2BUser() && belongsToOrganization(organizationId);
+
+        // Super admin can read all students
+        allow read: if isSuperAdmin();
+
+        // Game progress for students
         match /gameProgress/{progressId} {
-          allow read, write: if request.auth != null && request.auth.uid == userId;
+          allow read, write: if isB2BUser() && belongsToOrganization(organizationId);
+          allow read: if isSuperAdmin();
         }
 
-        // Stats subcollection (for streaks, achievements, etc.)
+        // Stats for students
         match /stats/{statId} {
-          allow read, write: if request.auth != null && request.auth.uid == userId;
+          allow read, write: if isB2BUser() && belongsToOrganization(organizationId);
+          allow read: if isSuperAdmin();
         }
 
-        // Progress subcollection (for existing learning content)
+        // Progress for students
         match /progress/{progressId} {
-          allow read, write: if request.auth != null && request.auth.uid == userId;
+          allow read, write: if isB2BUser() && belongsToOrganization(organizationId);
+          allow read: if isSuperAdmin();
         }
       }
     }
 
-    // Content collection (for Telugu learning content)
+    // ========================================
+    // B2B: ACTIVITY LOGS
+    // ========================================
+
+    match /activityLogs/{logId} {
+      // Only super admin can read activity logs
+      allow read: if isSuperAdmin();
+
+      // No client writes - only via Cloud Functions
+      allow write: if false;
+    }
+
+    // ========================================
+    // B2B: ORGANIZATION ANALYTICS
+    // ========================================
+
+    match /organizationAnalytics/{organizationId} {
+      // Super admin can read all analytics
+      allow read: if isSuperAdmin();
+
+      // Organization members can read their own analytics
+      allow read: if isB2BUser() && belongsToOrganization(organizationId);
+
+      // No client writes - only via Cloud Functions
+      allow write: if false;
+
+      // Stats subcollection
+      match /stats/{statId} {
+        allow read: if isSuperAdmin() ||
+                       (isB2BUser() && belongsToOrganization(organizationId));
+        allow write: if false;
+      }
+
+      // Daily analytics subcollection
+      match /daily/{date} {
+        allow read: if isSuperAdmin() ||
+                       (isB2BUser() && belongsToOrganization(organizationId));
+        allow write: if false;
+      }
+    }
+
+    // ========================================
+    // CONTENT (Global Telugu learning content)
+    // ========================================
+
     match /content/{contentId} {
-      // Everyone can read content
-      allow read: if request.auth != null;
-      // Only authenticated users with isSuperAdmin custom claim can write
-      allow write: if request.auth != null &&
-                      request.auth.token.isSuperAdmin == true;
+      // Everyone (authenticated) can read content
+      allow read: if isAuthenticated();
+
+      // Only super admin can create/update/delete content
+      allow write: if isSuperAdmin();
+
+      // Consumers can create their own custom content
+      allow create: if isConsumer() &&
+                       request.resource.data.createdBy == request.auth.uid &&
+                       request.resource.data.isPreloaded == false;
+
+      // Consumers can delete their own content
+      allow delete: if isConsumer() &&
+                       resource.data.createdBy == request.auth.uid &&
+                       resource.data.isPreloaded == false;
+
+      // Consumers can update their own content
+      allow update: if isConsumer() &&
+                       resource.data.createdBy == request.auth.uid &&
+                       resource.data.isPreloaded == false &&
+                       request.resource.data.createdBy == request.auth.uid &&
+                       request.resource.data.isPreloaded == false;
+    }
+
+    // ========================================
+    // LEGACY: OLD STRUCTURE (For backward compatibility)
+    // These will be deprecated - included for migration period
+    // ========================================
+
+    match /parents/{userId} {
+      allow read, write: if isAuthenticated() && isOwner(userId);
+
+      match /kids/{kidId} {
+        allow read, write: if isAuthenticated() && isOwner(userId);
+
+        match /gameProgress/{progressId} {
+          allow read, write: if isAuthenticated() && isOwner(userId);
+        }
+
+        match /stats/{statId} {
+          allow read, write: if isAuthenticated() && isOwner(userId);
+        }
+
+        match /progress/{progressId} {
+          allow read, write: if isAuthenticated() && isOwner(userId);
+        }
+      }
     }
   }
 }
