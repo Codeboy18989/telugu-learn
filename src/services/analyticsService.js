@@ -4,8 +4,6 @@ import {
   getDoc,
   getDocs,
   setDoc,
-  query,
-  where,
   serverTimestamp
 } from 'firebase/firestore';
 import { db } from '../config/firebase';
@@ -60,6 +58,9 @@ export const getPlatformStats = async () => {
           break;
         case USER_ROLES.SUPER_ADMIN:
           stats.users.totalSuperAdmins++;
+          break;
+        default:
+          // Unknown role, ignore
           break;
       }
     });

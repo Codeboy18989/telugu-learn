@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../../../context/AuthContext';
 import {
   createInvitation,
@@ -17,18 +17,18 @@ function InviteFriendsModal({ children, onClose }) {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  useEffect(() => {
-    loadSentInvitations();
-  }, []);
-
-  const loadSentInvitations = async () => {
+  const loadSentInvitations = useCallback(async () => {
     try {
       const invitations = await getSentInvitations(currentUser.uid);
       setSentInvitations(invitations);
     } catch (err) {
       console.error('Error loading invitations:', err);
     }
-  };
+  }, [currentUser.uid]);
+
+  useEffect(() => {
+    loadSentInvitations();
+  }, [loadSentInvitations]);
 
   const handleToggleChild = (childId) => {
     setSelectedChildren((prev) =>

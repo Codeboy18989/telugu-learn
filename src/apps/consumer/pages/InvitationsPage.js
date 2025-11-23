@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../../../context/AuthContext';
 import { getUserData } from '../../../services/userService';
 import {
@@ -16,11 +16,7 @@ function InvitationsPage() {
   const [success, setSuccess] = useState('');
   const [processingId, setProcessingId] = useState(null);
 
-  useEffect(() => {
-    loadInvitations();
-  }, [currentUser]);
-
-  const loadInvitations = async () => {
+  const loadInvitations = useCallback(async () => {
     if (!currentUser?.email) return;
 
     try {
@@ -33,7 +29,11 @@ function InvitationsPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentUser]);
+
+  useEffect(() => {
+    loadInvitations();
+  }, [loadInvitations]);
 
   const handleAcceptInvitation = async (invitation) => {
     if (

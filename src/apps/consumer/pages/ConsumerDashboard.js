@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../../../context/AuthContext';
 import { getChildren, getSharedChildren } from '../../../services/childService';
 import ChildrenManagement from '../components/ChildrenManagement';
@@ -14,11 +14,7 @@ function ConsumerDashboard() {
   const [sharedChildren, setSharedChildren] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    loadChildren();
-  }, [currentUser]);
-
-  const loadChildren = async () => {
+  const loadChildren = useCallback(async () => {
     if (!currentUser) return;
 
     try {
@@ -35,7 +31,11 @@ function ConsumerDashboard() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentUser]);
+
+  useEffect(() => {
+    loadChildren();
+  }, [loadChildren]);
 
   const handleLogout = async () => {
     try {

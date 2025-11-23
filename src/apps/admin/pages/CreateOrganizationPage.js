@@ -21,7 +21,6 @@ function CreateOrganizationPage() {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [createdOrgId, setCreatedOrgId] = useState(null);
   const [generatedCredentials, setGeneratedCredentials] = useState(null);
 
   // Form state
@@ -133,7 +132,6 @@ function CreateOrganizationPage() {
 
       // Step 1: Create the organization
       const organization = await createOrganization(orgData);
-      setCreatedOrgId(organization.id);
 
       // Step 2: Generate credentials
       const username = adminData.username || generateUsername();

@@ -126,9 +126,8 @@ export const createOrganizationUser = async (userData) => {
     email,
     displayName,
     role, // 'teacher' or 'school_admin'
-    organizationId,
-    username,
-    temporaryPassword
+    organizationId
+    // username and temporaryPassword handled by caller
   } = userData;
 
   try {
