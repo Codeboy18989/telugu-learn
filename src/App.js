@@ -6,13 +6,16 @@ import { USER_ROLES } from './services/userService';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 
+// Import app-specific components
+import ConsumerDashboard from './apps/consumer/pages/ConsumerDashboard';
+import InvitationsPage from './apps/consumer/pages/InvitationsPage';
+
 // Import existing components temporarily (will be replaced with new app-specific components)
 import Dashboard from './pages/Dashboard';
 import Settings from './pages/Settings';
 import LetterMatch from './components/games/reading/LetterMatch';
 
-// TODO: Import new app-specific components when created
-// import ConsumerDashboard from './apps/consumer/pages/ConsumerDashboard';
+// TODO: Import B2B and Admin components when created
 // import BusinessDashboard from './apps/business/pages/BusinessDashboard';
 // import AdminDashboard from './apps/admin/pages/AdminDashboard';
 
@@ -95,8 +98,7 @@ function AppRoutes() {
         path="/consumer/dashboard"
         element={
           <RoleRoute allowedRoles={[USER_ROLES.CONSUMER]}>
-            {/* TODO: Replace with ConsumerDashboard */}
-            <Dashboard />
+            <ConsumerDashboard />
           </RoleRoute>
         }
       />
@@ -112,8 +114,7 @@ function AppRoutes() {
         path="/consumer/invitations"
         element={
           <RoleRoute allowedRoles={[USER_ROLES.CONSUMER]}>
-            {/* TODO: Create InvitationsPage */}
-            <div>Invitations Page - Coming Soon</div>
+            <InvitationsPage />
           </RoleRoute>
         }
       />
