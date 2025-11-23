@@ -9,15 +9,19 @@ import Signup from './pages/Signup';
 // Import app-specific components
 import ConsumerDashboard from './apps/consumer/pages/ConsumerDashboard';
 import InvitationsPage from './apps/consumer/pages/InvitationsPage';
+import AdminDashboard from './apps/admin/pages/AdminDashboard';
+import OrganizationsPage from './apps/admin/pages/OrganizationsPage';
+import CreateOrganizationPage from './apps/admin/pages/CreateOrganizationPage';
+import ActivityLogsPage from './apps/admin/pages/ActivityLogsPage';
+import AnalyticsPage from './apps/admin/pages/AnalyticsPage';
 
 // Import existing components temporarily (will be replaced with new app-specific components)
 import Dashboard from './pages/Dashboard';
 import Settings from './pages/Settings';
 import LetterMatch from './components/games/reading/LetterMatch';
 
-// TODO: Import B2B and Admin components when created
+// TODO: Import B2B components when created
 // import BusinessDashboard from './apps/business/pages/BusinessDashboard';
-// import AdminDashboard from './apps/admin/pages/AdminDashboard';
 
 import './styles/theme.css';
 import './styles/auth.css';
@@ -169,8 +173,7 @@ function AppRoutes() {
         path="/admin/dashboard"
         element={
           <RoleRoute allowedRoles={[USER_ROLES.SUPER_ADMIN]}>
-            {/* TODO: Replace with AdminDashboard */}
-            <Dashboard />
+            <AdminDashboard />
           </RoleRoute>
         }
       />
@@ -178,8 +181,7 @@ function AppRoutes() {
         path="/admin/organizations"
         element={
           <RoleRoute allowedRoles={[USER_ROLES.SUPER_ADMIN]}>
-            {/* TODO: Create OrganizationsPage */}
-            <div>Organizations Management - Coming Soon</div>
+            <OrganizationsPage />
           </RoleRoute>
         }
       />
@@ -187,8 +189,7 @@ function AppRoutes() {
         path="/admin/create-organization"
         element={
           <RoleRoute allowedRoles={[USER_ROLES.SUPER_ADMIN]}>
-            {/* TODO: Create CreateOrganizationPage */}
-            <div>Create Organization - Coming Soon</div>
+            <CreateOrganizationPage />
           </RoleRoute>
         }
       />
@@ -196,8 +197,7 @@ function AppRoutes() {
         path="/admin/analytics"
         element={
           <RoleRoute allowedRoles={[USER_ROLES.SUPER_ADMIN]}>
-            {/* TODO: Create AnalyticsPage */}
-            <div>Analytics - Coming Soon</div>
+            <AnalyticsPage />
           </RoleRoute>
         }
       />
@@ -205,8 +205,7 @@ function AppRoutes() {
         path="/admin/activity-logs"
         element={
           <RoleRoute allowedRoles={[USER_ROLES.SUPER_ADMIN]}>
-            {/* TODO: Create ActivityLogsPage */}
-            <div>Activity Logs - Coming Soon</div>
+            <ActivityLogsPage />
           </RoleRoute>
         }
       />
