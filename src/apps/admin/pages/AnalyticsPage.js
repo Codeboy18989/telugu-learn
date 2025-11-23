@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -19,11 +19,7 @@ function AnalyticsPage() {
   const [error, setError] = useState('');
   const [timeframe, setTimeframe] = useState(30);
 
-  useEffect(() => {
-    loadAnalytics();
-  }, [timeframe]);
-
-  const loadAnalytics = async () => {
+  const loadAnalytics = useCallback(async () => {
     try {
       setLoading(true);
       const [stats, growth, top] = await Promise.all([
@@ -41,7 +37,11 @@ function AnalyticsPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [timeframe]);
+
+  useEffect(() => {
+    loadAnalytics();
+  }, [timeframe, loadAnalytics]);
 
   const handleLogout = async () => {
     try {

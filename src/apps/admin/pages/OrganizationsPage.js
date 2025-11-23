@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -24,14 +24,6 @@ function OrganizationsPage() {
     status: ''
   });
   const [orgStats, setOrgStats] = useState({});
-
-  useEffect(() => {
-    loadOrganizations();
-  }, []);
-
-  useEffect(() => {
-    applyFilters();
-  }, [organizations, filters]);
 
   const loadOrganizations = async () => {
     try {
@@ -59,7 +51,7 @@ function OrganizationsPage() {
     }
   };
 
-  const applyFilters = () => {
+  const applyFilters = useCallback(() => {
     let filtered = [...organizations];
 
     if (filters.type) {
@@ -71,7 +63,15 @@ function OrganizationsPage() {
     }
 
     setFilteredOrgs(filtered);
-  };
+  }, [organizations, filters]);
+
+  useEffect(() => {
+    loadOrganizations();
+  }, []);
+
+  useEffect(() => {
+    applyFilters();
+  }, [organizations, filters, applyFilters]);
 
   const handleStatusChange = async (orgId, newStatus) => {
     const org = organizations.find((o) => o.id === orgId);

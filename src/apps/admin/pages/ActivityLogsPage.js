@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -23,14 +23,6 @@ function ActivityLogsPage() {
     limit: 50
   });
 
-  useEffect(() => {
-    loadData();
-  }, []);
-
-  useEffect(() => {
-    loadLogs();
-  }, [filters]);
-
   const loadData = async () => {
     try {
       const orgs = await getAllOrganizations();
@@ -40,7 +32,7 @@ function ActivityLogsPage() {
     }
   };
 
-  const loadLogs = async () => {
+  const loadLogs = useCallback(async () => {
     try {
       setLoading(true);
       const activityLogs = await getAllLogs(filters);
@@ -51,7 +43,15 @@ function ActivityLogsPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [filters]);
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  useEffect(() => {
+    loadLogs();
+  }, [filters, loadLogs]);
 
   const handleExport = async () => {
     try {

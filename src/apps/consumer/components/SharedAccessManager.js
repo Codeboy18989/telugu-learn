@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../../../context/AuthContext';
 import {
   getSharedAccessList,
@@ -15,11 +15,7 @@ function SharedAccessManager({ children, onClose, onAccessChange }) {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  useEffect(() => {
-    loadSharedAccessList();
-  }, []);
-
-  const loadSharedAccessList = async () => {
+  const loadSharedAccessList = useCallback(async () => {
     try {
       setLoading(true);
       const accessList = await getSharedAccessList(currentUser.uid);
@@ -30,7 +26,11 @@ function SharedAccessManager({ children, onClose, onAccessChange }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentUser.uid]);
+
+  useEffect(() => {
+    loadSharedAccessList();
+  }, [loadSharedAccessList]);
 
   const handleRevokeAccess = async (partnerId, partnerEmail) => {
     if (
