@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { fixAllMissingUserDocuments, fixSingleUserDocument } from '../../../utils/fixMissingUserDocuments';
+import { fixAllMissingUserDocuments } from '../../../utils/fixMissingUserDocuments';
+import { autoRecoverUsersCollection, createUserDocumentManual } from '../../../utils/rebuildUsersCollection';
 import '../../../styles/dashboard.css';
 import '../admin.css';
 
@@ -15,7 +16,7 @@ function SystemMaintenancePage() {
   const [singleUserData, setSingleUserData] = useState({
     email: '',
     displayName: '',
-    role: 'school_admin',
+    role: 'consumer',
     organizationId: ''
   });
 
@@ -49,8 +50,14 @@ function SystemMaintenancePage() {
       return;
     }
 
-    if (!singleUserData.email.trim() || !singleUserData.organizationId.trim()) {
-      setError('Email and Organization ID are required');
+    if (!singleUserData.email.trim()) {
+      setError('Email is required');
+      return;
+    }
+
+    // Validate organization ID for B2B users
+    if ((singleUserData.role === 'teacher' || singleUserData.role === 'school_admin') && !singleUserData.organizationId.trim()) {
+      setError('Organization ID is required for B2B users (teachers/school admins)');
       return;
     }
 
@@ -59,7 +66,8 @@ function SystemMaintenancePage() {
       setError('');
       setResults(null);
 
-      const result = await fixSingleUserDocument(singleUserId, singleUserData);
+      // Use createUserDocumentManual which handles all user types
+      const result = await createUserDocumentManual(singleUserId, singleUserData);
 
       if (result.success) {
         setResults({
@@ -72,15 +80,44 @@ function SystemMaintenancePage() {
         setSingleUserData({
           email: '',
           displayName: '',
-          role: 'school_admin',
+          role: 'consumer',
           organizationId: ''
         });
       } else {
-        setError(result.error);
+        setError(result.error || result.message);
       }
     } catch (err) {
       console.error('Error fixing user document:', err);
       setError('Failed to fix user document: ' + err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRecoverUsers = async () => {
+    if (!window.confirm(
+      'IMPORTANT: This will rebuild the entire users collection from organizations and consumer profiles.\n\n' +
+      'This should only be used if you accidentally deleted the users collection.\n\n' +
+      'Are you sure you want to continue?'
+    )) {
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError('');
+      setResults(null);
+
+      const recoveryResults = await autoRecoverUsersCollection();
+
+      setResults({
+        scanned: recoveryResults.scanned,
+        fixed: recoveryResults.created,
+        errors: recoveryResults.errors
+      });
+    } catch (err) {
+      console.error('Error recovering users:', err);
+      setError('Failed to recover users: ' + err.message);
     } finally {
       setLoading(false);
     }
@@ -153,6 +190,36 @@ function SystemMaintenancePage() {
             </div>
           )}
 
+          {/* EMERGENCY: Rebuild Users Collection */}
+          <div className="card" style={{ borderColor: '#dc3545', borderWidth: '2px' }}>
+            <h2 style={{ color: '#dc3545' }}>🚨 EMERGENCY: Recover Deleted Users Collection</h2>
+            <p style={{ marginBottom: '1rem' }}>
+              <strong>Use this ONLY if you accidentally deleted the entire users collection!</strong>
+            </p>
+            <p>
+              This tool will scan your organizations and consumer profiles to rebuild the users collection.
+              It will:
+            </p>
+            <ul style={{ marginLeft: '1.5rem', marginBottom: '1rem' }}>
+              <li>Scan all organizations for B2B users (teachers/school admins)</li>
+              <li>Scan consumer profiles for B2C users</li>
+              <li>Recreate user documents with correct roles and organization links</li>
+              <li>Set the oldest user as super admin</li>
+            </ul>
+            <p style={{ color: '#856404', backgroundColor: '#fff3cd', padding: '0.75rem', borderRadius: '4px', marginBottom: '1rem' }}>
+              <strong>Note:</strong> Consumer emails may not be fully recovered (they'll get placeholder emails).
+              You'll need to manually update them or have users contact support.
+            </p>
+            <button
+              onClick={handleRecoverUsers}
+              disabled={loading}
+              className="primary-btn"
+              style={{ marginTop: '1rem', backgroundColor: '#dc3545' }}
+            >
+              {loading ? 'Recovering...' : '🚨 Rebuild Users Collection'}
+            </button>
+          </div>
+
           {/* Fix All Users */}
           <div className="card">
             <h2>Fix All Missing User Documents</h2>
@@ -223,27 +290,31 @@ function SystemMaintenancePage() {
                   }
                   required
                 >
+                  <option value="consumer">Consumer (B2C)</option>
                   <option value="teacher">Teacher</option>
                   <option value="school_admin">School Admin</option>
+                  <option value="super_admin">Super Admin</option>
                 </select>
               </div>
 
-              <div className="form-group">
-                <label>Organization ID</label>
-                <input
-                  type="text"
-                  value={singleUserData.organizationId}
-                  onChange={(e) =>
-                    setSingleUserData({
-                      ...singleUserData,
-                      organizationId: e.target.value
-                    })
-                  }
-                  placeholder="Organization ID from Firestore"
-                  required
-                />
-                <small>The organization this user belongs to</small>
-              </div>
+              {(singleUserData.role === 'teacher' || singleUserData.role === 'school_admin') && (
+                <div className="form-group">
+                  <label>Organization ID</label>
+                  <input
+                    type="text"
+                    value={singleUserData.organizationId}
+                    onChange={(e) =>
+                      setSingleUserData({
+                        ...singleUserData,
+                        organizationId: e.target.value
+                      })
+                    }
+                    placeholder="Organization ID from Firestore"
+                    required
+                  />
+                  <small>The organization this user belongs to (required for B2B users)</small>
+                </div>
+              )}
 
               <button
                 type="submit"
