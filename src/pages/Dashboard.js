@@ -1,19 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
-import { useModeLabels } from '../hooks/useModeLabels';
-import LearnerManagement from '../components/LearnerManagement';
-import ContentManagement from '../components/ContentManagement';
-import Learning from '../components/Learning';
 import '../styles/dashboard.css';
 
 function Dashboard() {
-  const { logout, isSuperAdmin } = useAuth();
+  const { logout, userRole, organizationBranding } = useAuth();
   const { isDarkMode, toggleTheme } = useTheme();
-  const labels = useModeLabels();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState('learners');
 
   async function handleLogout() {
     try {
@@ -28,12 +22,14 @@ function Dashboard() {
     <div className="dashboard">
       <header className="dashboard-header">
         <div className="header-content">
-          <h1>{labels.dashboardTitle} {isSuperAdmin && <span className="admin-badge">SUPER ADMIN</span>}</h1>
+          <h1>
+            {organizationBranding?.appName || 'తెలుగు Learn'} - Business Dashboard
+          </h1>
           <div className="header-actions">
             <button onClick={toggleTheme} className="theme-toggle-btn" title={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}>
               {isDarkMode ? '☀️' : '🌙'}
             </button>
-            <button onClick={() => navigate('/settings')} className="settings-btn" title="Settings">
+            <button onClick={() => navigate('/business/settings')} className="settings-btn" title="Settings">
               ⚙️
             </button>
             <button onClick={handleLogout} className="logout-btn">Logout</button>
@@ -41,32 +37,23 @@ function Dashboard() {
         </div>
       </header>
 
-      {/* Navigation Tabs */}
-      <nav className="dashboard-nav">
-        <button
-          className={`nav-tab ${activeTab === 'learners' ? 'active' : ''}`}
-          onClick={() => setActiveTab('learners')}
-        >
-          {labels.tab1}
-        </button>
-        <button
-          className={`nav-tab ${activeTab === 'content' ? 'active' : ''}`}
-          onClick={() => setActiveTab('content')}
-        >
-          {labels.tab2}
-        </button>
-        <button
-          className={`nav-tab ${activeTab === 'learn' ? 'active' : ''}`}
-          onClick={() => setActiveTab('learn')}
-        >
-          {labels.tab3}
-        </button>
-      </nav>
-
-      <main>
-        {activeTab === 'learners' && <LearnerManagement />}
-        {activeTab === 'content' && <ContentManagement />}
-        {activeTab === 'learn' && <Learning />}
+      <main style={{ padding: '2rem', textAlign: 'center' }}>
+        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+          <h2>Welcome {userRole === 'teacher' ? 'Teacher' : 'School Admin'}!</h2>
+          <p style={{ marginTop: '1rem', color: '#666' }}>
+            The B2B Business Dashboard is currently under development.
+          </p>
+          <div style={{ marginTop: '2rem', padding: '1rem', background: '#f5f5f5', borderRadius: '8px' }}>
+            <h3>Coming Soon:</h3>
+            <ul style={{ listStyle: 'none', padding: 0, marginTop: '1rem' }}>
+              <li>📚 Manage Students</li>
+              <li>📊 View Reports & Analytics</li>
+              <li>🎯 Track Student Progress</li>
+              <li>✏️ Create Assignments</li>
+              <li>⚙️ Organization Settings</li>
+            </ul>
+          </div>
+        </div>
       </main>
     </div>
   );

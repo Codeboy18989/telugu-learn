@@ -15,6 +15,20 @@ import { db } from '../config/firebase';
  */
 export const addChild = async (userId, childData) => {
   try {
+    // Ensure consumerProfile exists first
+    const profileRef = doc(db, 'consumerProfiles', userId);
+    const profileSnap = await getDoc(profileRef);
+
+    if (!profileSnap.exists()) {
+      // Create consumer profile if it doesn't exist
+      await setDoc(profileRef, {
+        phoneNumber: '',
+        preferences: {},
+        createdAt: serverTimestamp()
+      });
+    }
+
+    // Now add the child
     const childRef = doc(collection(db, 'consumerProfiles', userId, 'children'));
 
     const child = {
