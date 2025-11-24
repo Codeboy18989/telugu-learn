@@ -78,9 +78,18 @@ export function AuthProvider({ children }) {
 
       if (!userData) {
         console.error('User data not found for:', userId);
+        setError(
+          new Error(
+            'Your account is missing required data. This may happen with older accounts. ' +
+            'Please contact support or the administrator to fix your account. ' +
+            `User ID: ${userId}`
+          )
+        );
         setUserRole(null);
         setOrganizationId(null);
         setOrganizationBranding(null);
+        // Sign out the user to prevent app errors
+        await signOut(auth);
         return;
       }
 

@@ -120,19 +120,21 @@ export const updateLastLogin = async (userId) => {
 /**
  * Create organization user (teacher or school admin)
  * Only super admin can call this
+ * Called after Firebase Auth user is created
  */
-export const createOrganizationUser = async (userData) => {
+export const createOrganizationUser = async (userId, userData) => {
   const {
     email,
     displayName,
     role, // 'teacher' or 'school_admin'
     organizationId
-    // username and temporaryPassword handled by caller
   } = userData;
 
   try {
-    // Note: Firebase Auth user creation must be handled separately
-    // This only creates the Firestore documents
+    // Validate role
+    if (role !== USER_ROLES.TEACHER && role !== USER_ROLES.SCHOOL_ADMIN) {
+      throw new Error('Invalid role for organization user');
+    }
 
     const userDoc = {
       email,
@@ -143,13 +145,12 @@ export const createOrganizationUser = async (userData) => {
       lastLoginAt: null
     };
 
-    // Create user document
-    // Note: userId should be the Firebase Auth UID
-    // This will be handled in the component after Firebase Auth user creation
+    // Create user document in main users collection
+    await setDoc(doc(db, 'users', userId), userDoc);
 
-    return userDoc;
+    return { role, organizationId };
   } catch (error) {
-    console.error('Error preparing organization user:', error);
+    console.error('Error creating organization user:', error);
     throw error;
   }
 };

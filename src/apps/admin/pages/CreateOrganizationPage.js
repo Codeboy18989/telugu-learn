@@ -3,15 +3,13 @@ import { useAuth } from '../../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../config/firebase';
-import { doc, setDoc } from 'firebase/firestore';
-import { db } from '../../../config/firebase';
 import {
   createOrganization,
   addOrganizationAdmin,
   ORG_TYPES,
   SUBSCRIPTION_PLANS
 } from '../../../services/organizationService';
-import { USER_ROLES } from '../../../services/userService';
+import { USER_ROLES, createOrganizationUser } from '../../../services/userService';
 import '../../../styles/dashboard.css';
 import '../admin.css';
 
@@ -147,13 +145,11 @@ function CreateOrganizationPage() {
       const userId = userCredential.user.uid;
 
       // Step 4: Create user document in Firestore
-      await setDoc(doc(db, 'users', userId), {
+      await createOrganizationUser(userId, {
         email: adminData.email,
         displayName: adminData.displayName,
         role: adminData.role,
-        organizationId: organization.id,
-        createdAt: new Date(),
-        lastLoginAt: null
+        organizationId: organization.id
       });
 
       // Step 5: Add admin to organization
