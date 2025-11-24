@@ -14,6 +14,7 @@ import OrganizationsPage from './apps/admin/pages/OrganizationsPage';
 import CreateOrganizationPage from './apps/admin/pages/CreateOrganizationPage';
 import ActivityLogsPage from './apps/admin/pages/ActivityLogsPage';
 import AnalyticsPage from './apps/admin/pages/AnalyticsPage';
+import SystemMaintenancePage from './apps/admin/pages/SystemMaintenancePage';
 
 // Import existing components temporarily (will be replaced with new app-specific components)
 import Dashboard from './pages/Dashboard';
@@ -206,6 +207,14 @@ function AppRoutes() {
         element={
           <RoleRoute allowedRoles={[USER_ROLES.SUPER_ADMIN]}>
             <ActivityLogsPage />
+          </RoleRoute>
+        }
+      />
+      <Route
+        path="/admin/maintenance"
+        element={
+          <RoleRoute allowedRoles={[USER_ROLES.SUPER_ADMIN]}>
+            <SystemMaintenancePage />
           </RoleRoute>
         }
       />

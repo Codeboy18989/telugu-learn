@@ -115,6 +115,13 @@ function AdminDashboard() {
           <span className="action-icon">📚</span>
           <span className="action-label">Content Management</span>
         </button>
+        <button
+          className="action-card"
+          onClick={() => navigate('/admin/maintenance')}
+        >
+          <span className="action-icon">🔧</span>
+          <span className="action-label">System Maintenance</span>
+        </button>
       </div>
 
       <main className="dashboard-content">
