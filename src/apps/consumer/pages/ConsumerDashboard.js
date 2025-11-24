@@ -1,15 +1,17 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import { getChildren, getSharedChildren } from '../../../services/childService';
 import ChildrenManagement from '../components/ChildrenManagement';
 import ContentManagement from '../../../components/ContentManagement';
-import Learning from '../../../components/Learning';
+import ConsumerLearning from '../components/ConsumerLearning';
 import '../../../styles/dashboard.css';
 import '../consumer.css';
 
 function ConsumerDashboard() {
   const { currentUser, logout } = useAuth();
-  const [activeTab, setActiveTab] = useState(0);
+  const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState('children');
   const [children, setChildren] = useState([]);
   const [sharedChildren, setSharedChildren] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -45,68 +47,83 @@ function ConsumerDashboard() {
     }
   };
 
-  const tabs = [
-    { label: '👨‍👩‍👧 My Children', icon: '👨‍👩‍👧' },
-    { label: '📚 Content Library', icon: '📚' },
-    { label: '🎓 Learn', icon: '🎓' }
-  ];
-
   const allChildren = [...children, ...sharedChildren];
 
   return (
-    <div className="dashboard-container">
-      {/* Header */}
-      <header className="dashboard-header">
-        <div className="header-content">
-          <h1>🏠 Family Learning Dashboard</h1>
-          <div className="header-actions">
+    <div className="consumer-dashboard">
+      {/* Simple Header */}
+      <header className="consumer-header">
+        <div className="header-container">
+          <div className="header-left">
+            <h1 className="app-title">తెలుగు Learn</h1>
+          </div>
+          <div className="header-right">
+            <button
+              className="nav-button"
+              onClick={() => navigate('/consumer/invitations')}
+              title="View invitations"
+            >
+              📬 Invitations
+            </button>
             <span className="user-email">{currentUser?.email}</span>
-            <button onClick={handleLogout} className="logout-btn">
+            <button className="logout-button" onClick={handleLogout}>
               Logout
             </button>
           </div>
         </div>
       </header>
 
-      {/* Navigation Tabs */}
-      <nav className="dashboard-tabs">
-        {tabs.map((tab, index) => (
+      {/* Simple Navigation */}
+      <nav className="consumer-nav">
+        <div className="nav-container">
           <button
-            key={index}
-            className={`tab-btn ${activeTab === index ? 'active' : ''}`}
-            onClick={() => setActiveTab(index)}
+            className={`nav-tab ${activeTab === 'children' ? 'active' : ''}`}
+            onClick={() => setActiveTab('children')}
           >
-            <span className="tab-icon">{tab.icon}</span>
-            <span className="tab-label">{tab.label}</span>
+            <span className="nav-icon">👨‍👩‍👧</span>
+            <span>My Children</span>
           </button>
-        ))}
+          <button
+            className={`nav-tab ${activeTab === 'learn' ? 'active' : ''}`}
+            onClick={() => setActiveTab('learn')}
+          >
+            <span className="nav-icon">🎓</span>
+            <span>Learn</span>
+          </button>
+          <button
+            className={`nav-tab ${activeTab === 'library' ? 'active' : ''}`}
+            onClick={() => setActiveTab('library')}
+          >
+            <span className="nav-icon">📚</span>
+            <span>Content Library</span>
+          </button>
+        </div>
       </nav>
 
-      {/* Tab Content */}
-      <main className="dashboard-content">
-        {loading && activeTab === 0 ? (
-          <div className="loading-state">
-            <p>Loading children...</p>
-          </div>
-        ) : (
-          <>
-            {activeTab === 0 && (
-              <ChildrenManagement
-                children={children}
-                sharedChildren={sharedChildren}
-                onChildrenChange={loadChildren}
-              />
-            )}
-            {activeTab === 1 && <ContentManagement />}
-            {activeTab === 2 && (
-              <Learning
-                learners={allChildren}
-                learnerType="child"
-                parentId={currentUser?.uid}
-              />
-            )}
-          </>
-        )}
+      {/* Main Content */}
+      <main className="consumer-main">
+        <div className="content-container">
+          {loading && activeTab === 'children' ? (
+            <div className="loading-state">
+              <div className="spinner"></div>
+              <p>Loading your children...</p>
+            </div>
+          ) : (
+            <>
+              {activeTab === 'children' && (
+                <ChildrenManagement
+                  children={children}
+                  sharedChildren={sharedChildren}
+                  onChildrenChange={loadChildren}
+                />
+              )}
+              {activeTab === 'learn' && (
+                <ConsumerLearning children={allChildren} />
+              )}
+              {activeTab === 'library' && <ContentManagement />}
+            </>
+          )}
+        </div>
       </main>
     </div>
   );
